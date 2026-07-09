@@ -7049,7 +7049,7 @@ function openThread(id){
   const opts=document.getElementById('chatOpts');
   const area=document.getElementById('chatInputArea');
   if(opts)opts.style.display='flex';
-  if(area)area.style.display='none';
+  if(area)area.style.display='flex';
    document.getElementById('chatOverlay').classList.add('show'); 
   updatePhoneBadge();
 }
@@ -7081,7 +7081,7 @@ async function _aiFillThread(thread){
 }
 
 function renderChat(){ 
-  const thread=G.phone.threads.find(t=>t.id===G._openThreadId);if(!thread)return;
+  const thread=G.phone.threads.find(t=>String(t.id)===String(G._openThreadId));if(!thread)return;
   document.getElementById('chatName').textContent=thread.npcName+(thread.type==='call'?' 📞来电':'');
   const body=document.getElementById('chatBody');
   let html='<div class="chat-time">'+getTimeStr(thread.receivedMonth)+'</div>';
