@@ -7520,6 +7520,7 @@ ${p.name}的家人/朋友是${relation}。玩家${gameState.age}岁，${gameStat
 - [TREAT:数字金额] = 你请客
 - 玩家主动给你钱时，不加任何标签
 - 搞反方向是严重Bug
+- ⚠️ 重要：玩家说"借我钱"/"借给我XX"时，这是玩家向NPC借钱，NPC不要加任何标签，直接在对话中自然回应（同意/拒绝/讨价还价）。只有NPC主动向玩家要钱时才用[ASK:...]
 - ⚠️ 金额必须纯数字，不能用中文"20万"→应写[GIVE:200000]
 
 ## 🧠 记忆规则（最重要）
@@ -7972,7 +7973,7 @@ function resolveMoneyDecision(accepted){
       window._pendingAsk=null;
       return;
     }
-    G.cash=clamp(G.cash-pa.amount,-999999,999999999);
+    G.cash=clampCash(G.cash-pa.amount);
     addChatBubble('money-notice','💰 你借给了'+npcName+' '+fmt(pa.amount));
     recordMoneyHistory(pa.npcId,'借给'+npcName+'¥'+pa.amount,'你借给了'+npcName+'¥'+pa.amount,pa.amount,'lend_to_npc');
     showToast('已借出 '+fmt(pa.amount));
