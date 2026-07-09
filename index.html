@@ -3323,7 +3323,7 @@ function acceptOffer(offerId){
   G._promotionMonth=0;
   G._perfAwardedThisMonth=false;
   // 签字费
-  if(offer.bonus>0) G.cash+=offer.bonus;
+  if(offer.bonus>0) G.cash=clampCash(G.cash+offer.bonus);
   // 移除已接受的offer
   G.offers.splice(idx,1);
   // 记录
@@ -3546,7 +3546,7 @@ function handleWorkScenarioChoice(idx){
   var opt=data.options[idx];if(!opt)return;
   var eff=opt.effect||{};
   // 应用效果
-  if(eff.cash)G.cash+=eff.cash;
+  if(eff.cash)G.cash=clampCash(G.cash+eff.cash);
   if(eff.health)G.health=clamp(G.health+eff.health,0,200);
   if(eff.mood)G.mood=clamp(G.mood+eff.mood,0,200);
   if(eff.IQ)G.IQ=clamp(G.IQ+eff.IQ,0,200);
@@ -3720,13 +3720,13 @@ function selectDecisionOption(optIndex){
   const opt=evt.options[optIndex];
   // Apply effects
   const eff=opt.effect||{};
-  if(eff.cash)G.cash+=eff.cash;
+  if(eff.cash)G.cash=clampCash(G.cash+eff.cash);
   if(eff.health)G.health=clamp(G.health+eff.health,0,200);
   if(eff.mood)G.mood=clamp(G.mood+eff.mood,0,200);
   if(eff.IQ)G.IQ=clamp(G.IQ+eff.IQ,0,200);
   if(eff.EQ)G.EQ=clamp(G.EQ+eff.EQ,0,200);
   if(eff.salaryBonus)G.salaryBonus+=eff.salaryBonus;
-  if(eff.money)G.cash+=eff.money;
+  if(eff.money)G.cash=clampCash(G.cash+eff.money);
   // 创业/离职状态处理
   if(eff.career==='selfEmployed'){
     G.selfEmployed=true;
@@ -3867,7 +3867,7 @@ function buyLuxury(id){
   if(G.cash<item.price){showToast('现金不足！');return;}
   showModal({title:'购买 '+item.name,content:'价格：'+fmt(item.price)+'\n\n'+item.desc+'\n\n确定购买吗？',success(res){
     if(res.confirm){
-      G.cash-=item.price;
+      if(G.cash<item.price){showToast('现金不足！');return;}G.cash=clampCash(G.cash-item.price);
       G.luxuryItems.push(id);
       G.mood=clamp(G.mood+item.effect.mood,0,200);
       // Social feedback
@@ -3885,7 +3885,7 @@ function buyLuxury(id){
 // ========== 主动操作 ==========
 function studyCharge(){
   if(G.cash<5000){showToast('现金不足！');return;}
-  G.cash-=5000;G.IQ=clamp(G.IQ+3,0,200);G.mood=clamp(G.mood-2,0,200);
+  if(G.cash<5000){showToast('现金不足！');return;}G.cash=clampCash(G.cash-5000);G.IQ=clamp(G.IQ+3,0,200);G.mood=clamp(G.mood-2,0,200);
   showFloatText('🧠 IQ+3',true);showFloatText('💰 -¥5000',false);
   G.monthlyTasks['study']=true;
   saveGame();refreshAll();
@@ -3900,7 +3900,7 @@ function doSocialGathering(type){
   const cfg={normal:{cost:500,eq:1,mood:1},premium:{cost:3000,eq:5,mood:3}};
   const c=cfg[type];
   if(G.cash<c.cost){showToast('现金不足！');return;}
-  G.cash-=c.cost;G.EQ=clamp(G.EQ+c.eq,0,200);G.mood=clamp(G.mood+c.mood,0,200);
+  if(G.cash<c.cost){showToast('现金不足！');return;}G.cash=clampCash(G.cash-c.cost);G.EQ=clamp(G.EQ+c.eq,0,200);G.mood=clamp(G.mood+c.mood,0,200);
   showFloatText('💬 EQ+'+c.eq,true);showFloatText('😊 Mood+'+c.mood,true);showFloatText('💰 -¥'+c.cost,false);
   G.monthlyTasks['social']=true;
   triggerGatherEvent(type);
@@ -4132,12 +4132,12 @@ function refreshFamily(){
 }
 function marry(){
   if(G.cash<100000){showModal({title:'余额不足',content:'结婚需要10万彩礼，当前现金不足！',showCancel:false,confirmText:'知道了'});return;}
-  showModal({title:'选择配偶',content:SPOUSES.map((s,i)=>(i+1)+'. '+s.name+'（月薪'+fmtShort(s.salary/12)+'）').join('\n'),confirmText:'随机匹配',success(res){if(res.confirm){const sp=SPOUSES[randInt(0,SPOUSES.length-1)];G.cash-=100000;G.spouse=sp.id;G.mood=clamp(G.mood+15,0,200);if(!G.lifeEvents)G.lifeEvents=[];G.lifeEvents.push({month:G.totalMonths,icon:'💒',title:'与'+sp.name+'结婚',detail:'花费10万彩礼，携手走入婚姻殿堂',type:'family'});saveGame();refreshLife();refreshWork();showToast('🎊 恭喜！你和'+sp.name+'结婚了！');checkAchievements();}}});
+  showModal({title:'选择配偶',content:SPOUSES.map((s,i)=>(i+1)+'. '+s.name+'（月薪'+fmtShort(s.salary/12)+'）').join('\n'),confirmText:'随机匹配',success(res){if(res.confirm){const sp=SPOUSES[randInt(0,SPOUSES.length-1)];if(G.cash<100000){showToast('彩礼不足！');return;}G.cash=clampCash(G.cash-100000);G.spouse=sp.id;G.mood=clamp(G.mood+15,0,200);if(!G.lifeEvents)G.lifeEvents=[];G.lifeEvents.push({month:G.totalMonths,icon:'💒',title:'与'+sp.name+'结婚',detail:'花费10万彩礼，携手走入婚姻殿堂',type:'family'});saveGame();refreshLife();refreshWork();showToast('🎊 恭喜！你和'+sp.name+'结婚了！');checkAchievements();}}});
 }
 function haveChild(){
   if(G.children>=3){showToast('最多只能生3个孩子');return;}
   if(G.cash<50000){showModal({title:'余额不足',content:'生子需要5万费用，当前现金不足！',showCancel:false});return;}
-  G.cash-=50000;G.children++;G.childAges.push(0);G.mood=clamp(G.mood+20,0,200);
+  if(G.cash<50000){showToast('费用不足！');return;}G.cash=clampCash(G.cash-50000);G.children++;G.childAges.push(0);G.mood=clamp(G.mood+20,0,200);
   if(!G.lifeEvents)G.lifeEvents=[];G.lifeEvents.push({month:G.totalMonths,icon:'👶',title:'孩子出生',detail:'家里添了一个宝宝！家庭更完整了',type:'family'});
   saveGame();refreshLife();refreshWork();showToast('👶 恭喜！家里添了一个宝宝！');
   checkAchievements();
