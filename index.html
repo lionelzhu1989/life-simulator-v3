@@ -5843,11 +5843,9 @@ function startEncounterScene(sceneKey){
   html += '</div>';
   html += '<div id="encounterResult" style="display:none;"></div>';
   // 自定义按钮区
-  var btnsEl = document.getElementById('modalBtns');
-  if(btnsEl) btnsEl.style.display='none';
   showModal({title:getEncounterTitle(sceneKey), content:html, showCancel:false, confirmText:' ', cancelText:'', success:function(){}});
-  // 隐藏默认确认按钮
-  setTimeout(function(){var b=document.getElementById('modalBtns');if(b)b.style.display='none';},10);
+  // 隐藏默认确认按钮（必须在showModal之后，因为showModal会重置display）
+  var b=document.getElementById('modalBtns');if(b)b.style.display='none';
 }
 
 // ===== 处理玩家选择（AI驱动） =====
@@ -5887,11 +5885,18 @@ async function handleEncounterChoice(choiceIndex){
   }
   // 调用AI生成回应
   var playerState = {age:G.age, cash:G.cash, mood:G.mood, iq:G.IQ, eq:G.EQ, health:G.health};
-  var aiResult = await generateEncounterAIResponse(sceneKey, npcName, choice.text, eff, playerState);
+  var aiResult;
+  try{
+    aiResult = await generateEncounterAIResponse(sceneKey, npcName, choice.text, eff, playerState);
+  }catch(err){
+    console.error('Encounter AI error:',err);
+    aiResult = {text:npcName+'点了点头，没有多说什么。', addFriend:false};
+  }
+  if(!aiResult) aiResult = {text:npcName+'笑了笑，没有回应。', addFriend:false};
   // 存储AI判断的加微信意愿
-  G._encounter.wantFriend = aiResult.wantFriend;
+  if(G._encounter) G._encounter.wantFriend = aiResult.addFriend;
   // 累计通过数（AI觉得好的回应也算）
-  if(aiResult.wantFriend) G._encounter.passCount++;
+  if(G._encounter && aiResult.addFriend) G._encounter.passCount++;
   // 显示AI回应
   if(resultDiv){
     resultDiv.innerHTML = '<div style="display:flex;gap:8px;align-items:flex-start;margin-top:12px;">'+
@@ -8431,14 +8436,13 @@ function renderNotifications(){
 function switchPhoneTab(tab){
   document.querySelectorAll('.phone-tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.phone-content').forEach(c=>c.classList.remove('active'));
-  const tabNames=['messages','contacts','schedule','moments','notifications'];
+  const tabNames=['messages','contacts','moments','notifications'];
   const idx=tabNames.indexOf(tab);
   if(idx>=0){const allTabs=document.querySelectorAll('.phone-tab');if(allTabs[idx])allTabs[idx].classList.add('active');}
   const el=document.getElementById('phone-'+tab);
   if(el)el.classList.add('active');
   if(tab==='messages')renderPhoneList();
   else if(tab==='contacts')renderContacts();
-  else if(tab==='schedule')renderSchedule();
   else if(tab==='moments')renderMoments();
   else if(tab==='notifications')renderNotifications();
 }
