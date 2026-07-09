@@ -2532,7 +2532,7 @@ function selectCareer(careerId,isInternship){
 function initStockPrices(){STOCKS.forEach(s=>{if(!G.stockPrices[s.code])G.stockPrices[s.code]=s.basePrice;});}
 
 // ========== 刷新UI ==========
-function refreshAll(){refreshLife();refreshHeader();updatePhoneBadge();}
+let _refreshLock=false;function refreshAll(){if(_refreshLock)return;_refreshLock=true;setTimeout(()=>{_refreshLock=false;},50);refreshLife();refreshHeader();updatePhoneBadge();}
 function refreshLearning(){
   const el=document.getElementById('learningList');if(!el)return;
   if(!G.learning)G.learning={completed:[],studying:null,studyEndMonth:0};
@@ -11507,7 +11507,7 @@ async function _doAdvanceMonth(){
   var safetyTimer=setTimeout(function(){
     if(!done){
       done=true;
-      console.error('advanceMonth TIMEOUT - forcing unlock');
+      
       btn.disabled=false;btn.textContent='🚀 度过一月';
       try{refreshAll();}catch(e){}
     }
@@ -11516,7 +11516,7 @@ async function _doAdvanceMonth(){
     try{
       await advanceMonth();
     }catch(e){
-      console.error('advanceMonth error:',e);
+      
       if(window.showError)showError('月份推进出错: '+e.message);
     }
     if(done)return; // safety already fired
