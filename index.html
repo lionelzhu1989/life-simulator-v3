@@ -7105,7 +7105,7 @@ function renderChat(){
 }
 
 async function selectPhoneOption(optIdx){
-  const thread=G.phone.threads.find(t=>t.id===G._openThreadId);if(!thread||thread.status==='replied')return;
+  const thread=G.phone.threads.find(t=>String(t.id)===String(G._openThreadId));if(!thread||thread.status==='replied')return;
   const round=thread.rounds[thread.currentRound];if(!round||!round.opts)return;
   const opt=round.opts[optIdx];
   if(opt.reqIQ&&G.IQ<opt.reqIQ)return;
@@ -7226,7 +7226,7 @@ function closeChat(){
   }
 }
 function showChatProfile(){
-  const thread=G.phone.threads.find(t=>t.id===G._openThreadId);
+  const thread=G.phone.threads.find(t=>String(t.id)===String(G._openThreadId));
   let npcName='',npcId='';
   if(thread){npcName=thread.npcName;npcId=thread.npcId||'';}
   else if(G._openProactiveNpc){npcName=G._openProactiveNpc;initSocialContacts();const p=NPC_PERSONALITIES[G._openProactiveNpc];if(p)npcName=p.name;}
