@@ -3135,7 +3135,7 @@ async function advanceMonth(){
     if(G._recentEvents)G._recentEvents.push('🥚彩蛋：'+egg.text.replace(/[\u{1F300}-\u{1FFFF}]/gu,'').substring(0,20));
   }
   // Phone triggers
-  if(!G.gameOver){initPhoneState();triggerFollowUps();triggerPhoneMessages();processScheduledDates().catch(e=>console.error("scheduledDates error:",e));triggerParentHelp();if(Math.random()<0.50)triggerAIMoments().catch(()=>{});if(Math.random()<0.40)triggerMoments();generateNotifications();generateGossipEvent();triggerGathering();}
+  if(!G.gameOver){initPhoneState();triggerFollowUps();triggerPhoneMessages();processScheduledDates().catch(()=>{});triggerParentHelp();if(Math.random()<0.50)triggerAIMoments().catch(()=>{});if(Math.random()<0.40)triggerMoments();generateNotifications();generateGossipEvent();triggerGathering();}
   // Social system: monthly trigger
   if(!G.gameOver && G.totalMonths >= G.lastSocialCheck + 1){ triggerMonthlySocial(); G.lastSocialCheck = G.totalMonths; }
   // 社交拓展：每月有概率触发偶遇场景
