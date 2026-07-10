@@ -64,7 +64,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 .input-group{display:flex;align-items:center;gap:8px;margin-top:8px;}
 .input{flex:1;height:36px;border:1.5px solid #ddd;border-radius:8px;padding:0 12px;font-size:14px;outline:none;transition:border .2s;}
 .input:focus{border-color:var(--primary);}
-.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;display:none;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
 .modal-overlay.show{opacity:1;pointer-events:auto;}
 .modal-box{background:#fff;border-radius:16px;width:85%;max-width:360px;max-height:85vh;padding:24px 20px;text-align:center;transform:scale(0.85);transition:transform .25s;pointer-events:auto;overflow:hidden;display:flex;flex-direction:column;}
 .modal-overlay.show .modal-box{transform:scale(1);}
@@ -135,7 +135,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 .guide-overlay.show .guide-box{transform:scale(1);}
 .guide-icon{font-size:48px;margin-bottom:12px;}
 .guide-text{font-size:16px;font-weight:600;color:var(--text);margin-bottom:16px;line-height:1.5;}
-.promo-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:5000;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.promo-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);z-index:5000;display:none;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
 .promo-overlay.show{opacity:1;pointer-events:auto;}
 .promo-label{font-size:20px;color:rgba(255,255,255,.6);letter-spacing:8px;text-transform:uppercase;animation:promoFadeIn .5s ease-out;}
 .promo-text{font-size:48px;font-weight:900;color:var(--gold);text-shadow:0 0 20px rgba(241,196,15,.8);margin:16px 0;animation:promoPulse .6s ease-out .2s both;}
@@ -182,7 +182,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 
 
 /* ====== V2: Event Choice Modal ====== */
-.choice-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:4500;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.choice-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.7);z-index:4500;display:none;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
 .choice-overlay.show{opacity:1;pointer-events:auto;}
 .choice-card{background:#fff;border-radius:20px;width:90%;max-width:380px;max-height:85vh;overflow-y:auto;transform:translateY(30px);transition:transform .35s cubic-bezier(.34,1.56,.64,1);padding:0;}
 .choice-overlay.show .choice-card{transform:translateY(0);}
@@ -222,7 +222,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 @keyframes tierPulse{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
 
 /* ====== V2: Forbes Celebration ====== */
-.forbes-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:6000;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .5s;}
+.forbes-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.9);z-index:6000;display:none;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .5s;}
 .forbes-overlay.show{opacity:1;pointer-events:auto;}
 .forbes-text{font-size:48px;font-weight:900;color:#f1c40f;text-shadow:0 0 40px rgba(241,196,15,.6);animation:forbesZoom .8s cubic-bezier(.34,1.56,.64,1);}
 .forbes-sub{font-size:20px;color:#fff;margin-top:16px;animation:forbesFade 1s ease-out .5s both;}
@@ -266,7 +266,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 /* Trade input number spinner hide */
 #tradeInput::-webkit-inner-spin-button,#tradeInput::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 #tradeInput[type=number]{-moz-appearance:textfield;}
-.chat-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#ededed;z-index:1500;display:none;flex-direction:column;max-width:480px;margin:0 auto;}
+.chat-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#ededed;z-index:99999;display:none;flex-direction:column;max-width:480px;margin:0 auto;}
 .chat-overlay.show{display:flex;}
 .chat-hd{background:var(--header-bg);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
 .chat-back{font-size:24px;cursor:pointer;padding:4px;line-height:1;}
@@ -355,7 +355,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 
 
 /* ====== Money Interaction System ====== */
-.money-decision-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.money-decision-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
 .money-decision-overlay.show{opacity:1;pointer-events:auto;}
 .money-decision-card{background:#fff;border-radius:16px;padding:24px;width:280px;text-align:center;transform:scale(0.85);transition:transform .25s;}
 .money-decision-overlay.show .money-decision-card{transform:scale(1);}
@@ -365,7 +365,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 .money-decision-reason{font-size:13px;color:#888;margin-bottom:16px;line-height:1.5;}
 .money-decision-btns{display:flex;gap:12px;}
 .money-decision-btns .btn{flex:1;}
-.money-give-confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
+.money-give-confirm-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:2000;display:none;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
 .money-give-confirm-overlay.show{opacity:1;pointer-events:auto;}
 .money-give-confirm-card{background:#fff;border-radius:16px;padding:24px;width:280px;text-align:center;transform:scale(0.85);transition:transform .25s;}
 .money-give-confirm-overlay.show .money-give-confirm-card{transform:scale(1);}
@@ -1201,7 +1201,7 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
 <div id="chatOverlay" class="chat-overlay">
   <div class="chat-hd"><span class="chat-back" onclick="closeChat()">←</span><span class="chat-nm" id="chatName"></span><span class="chat-profile-btn" onclick="showChatProfile()" style="margin-left:auto;font-size:12px;color:#3498db;cursor:pointer;padding:4px 8px;border:1px solid #3498db;border-radius:12px;">查看资料</span></div>
   <div class="chat-body" id="chatBody"></div>
-  <div class="chat-opts" id="chatOpts" style="display:none;"></div>
+  <div class="chat-opts" id="chatOpts" style="display:none;z-index:99999;"></div>
   <div class="chat-input-area" id="chatInputArea">
     <button class="chat-input-back" onclick="closeChat()">📞</button>
     <input type="text" class="chat-input-field" id="chatInputField" placeholder="输入消息..." />
@@ -7043,6 +7043,7 @@ function openThread(id){
   const thread=G.phone.threads.find(t=>String(t.id)===String(id));  if(!thread){ return;}
   if(thread.status==='unread'){thread.status='reading';thread.readMonth=G.totalMonths;}
   G._openThreadId=id;
+  G._openProactiveNpc=thread.npcId; // 设置NPC ID用于发送消息
   // AI替换硬编码NPC消息（异步，不阻塞UI）
   _aiFillThread(thread);
   renderChat();
