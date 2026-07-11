@@ -1021,10 +1021,10 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
   <!-- 投资页 -->
   <div id="page-invest" class="page">
     <div class="invest-tabs">
-      <div class="invest-tab active" onclick="switchInvestTab('stock')">📈 股票</div>
-      <div class="invest-tab" onclick="switchInvestTab('house')">🏠 房产</div>
-      <div class="invest-tab" onclick="switchInvestTab('business')">🏪 商业</div>
-      <div class="invest-tab" onclick="switchInvestTab('tech')">🚀 科技</div>
+      <div class="invest-tab active" onclick="switchInvestTab(\'stock\')">📈 股票</div>
+      <div class="invest-tab" onclick="switchInvestTab(\'house\')">🏠 房产</div>
+      <div class="invest-tab" onclick="switchInvestTab(\'business\')">🏪 商业</div>
+      <div class="invest-tab" onclick="switchInvestTab(\'tech\')">🚀 科技</div>
     </div>
     <div id="invest-stock" class="invest-content active">
       <div id="newsArea"></div>
@@ -1092,10 +1092,10 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
   <div id="page-phone" class="page">
     <div class="phone-hint" id="phoneHint" style="display:none;">⚠️ <span id="phoneHintText">有未读消息需要处理</span></div>
     <div class="phone-tabs">
-      <div class="phone-tab active" onclick="switchPhoneTab('messages')">💬 消息</div>
-      <div class="phone-tab" onclick="switchPhoneTab('contacts')">📒 通讯录</div>
-      <div class="phone-tab" onclick="switchPhoneTab('moments')">📷 朋友圈</div>
-            <div class="phone-tab" onclick="switchPhoneTab('notifications')">🔔 通知</div>
+      <div class="phone-tab active" onclick="switchPhoneTab(\'messages\')">💬 消息</div>
+      <div class="phone-tab" onclick="switchPhoneTab(\'contacts\')">📒 通讯录</div>
+      <div class="phone-tab" onclick="switchPhoneTab(\'moments\')">📷 朋友圈</div>
+            <div class="phone-tab" onclick="switchPhoneTab(\'notifications\')">🔔 通知</div>
     </div>
     <div id="phone-messages" class="phone-content active"></div>
     <div id="phone-contacts" class="phone-content"></div>
@@ -1107,21 +1107,21 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
   <!-- 宠物页 -->
   <div id="page-pet" class="page">
     <div id="petSubTabs" class="pet-subtabs" style="display:none;">
-      <div class="pet-subtab active" onclick="switchPetTab('shop',this)">🏪 商店</div>
-      <div class="pet-subtab" onclick="switchPetTab('mypet',this)" id="petMyPetTab">🐾 我的宠物</div>
+      <div class="pet-subtab active" onclick="switchPetTab(\'shop\',this)">🏪 商店</div>
+      <div class="pet-subtab" onclick="switchPetTab(\'mypet\',this)" id="petMyPetTab">🐾 我的宠物</div>
     </div>
     <div id="petStoreView"></div>
     <div id="petDetailView" style="display:none;"></div>
   </div>
 
   <div class="tab-bar">
-    <div class="tab-item active" onclick="switchTab('life')"><span class="tab-icon">🏠</span><span>首页</span></div>
-    <div class="tab-item" onclick="switchTab('work')"><span class="tab-icon">💼</span><span>工作</span></div>
-    <div class="tab-item" onclick="switchTab('invest')"><span class="tab-icon">📈</span><span>投资</span></div>
-    <div class="tab-item" onclick="switchTab('pet')" id="petTabItem" style="position:relative;"><span class="tab-icon">🐾</span><span>宠物</span><span class="phone-badge" id="petBadge" style="display:none;">0</span></div>
-    <div class="tab-item" onclick="switchTab('more')"><span class="tab-icon">📚</span><span>成长</span></div>
-    <div class="tab-item" onclick="switchTab('task')"><span class="tab-icon">🎯</span><span>成就</span></div>
-    <div class="tab-item" onclick="switchTab('phone')" id="phoneTabItem" style="position:relative;"><span class="tab-icon">📱</span><span>手机</span><span class="phone-badge" id="phoneBadge" style="display:none;">0</span></div>
+    <div class="tab-item active" onclick="switchTab(\'life\')"><span class="tab-icon">🏠</span><span>首页</span></div>
+    <div class="tab-item" onclick="switchTab(\'work\')"><span class="tab-icon">💼</span><span>工作</span></div>
+    <div class="tab-item" onclick="switchTab(\'invest\')"><span class="tab-icon">📈</span><span>投资</span></div>
+    <div class="tab-item" onclick="switchTab(\'pet\')" id="petTabItem" style="position:relative;"><span class="tab-icon">🐾</span><span>宠物</span><span class="phone-badge" id="petBadge" style="display:none;">0</span></div>
+    <div class="tab-item" onclick="switchTab(\'more\')"><span class="tab-icon">📚</span><span>成长</span></div>
+    <div class="tab-item" onclick="switchTab(\'task\')"><span class="tab-icon">🎯</span><span>成就</span></div>
+    <div class="tab-item" onclick="switchTab(\'phone\')" id="phoneTabItem" style="position:relative;"><span class="tab-icon">📱</span><span>手机</span><span class="phone-badge" id="phoneBadge" style="display:none;">0</span></div>
   </div>
 </div>
 
@@ -2293,7 +2293,7 @@ document.addEventListener('click', function(e){
 }, true);
 
 let toastTimer=null;
-function showToast(msg,dur){const el=document.getElementById('toastEl');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),dur||1800);}
+function showToast(msg,dur){const el=document.getElementById('toastEl');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=null;toastTimer=setTimeout(()=>el.classList.remove('show'),dur||1800);}
 function showFloatText(text,positive){
   const el=document.createElement('div');
   el.className='float-text '+(positive?'positive':'negative');
@@ -2325,7 +2325,8 @@ function switchInvestTab(name){
 }
 
 // ========== 初始化 ==========
-function startGame(){ 
+function startGame(){
+  G._careerSelectPending=false; 
   // 修复：禁用新手引导，直接进入游戏
   // if(!localStorage.getItem('ob_done_v2') && typeof startOnboarding==='function'){
   //   startOnboarding();
@@ -2387,6 +2388,7 @@ function updateInternshipHint(){
 }
 // V5: 新游戏（清除存档）
 function newGame(){
+  G._careerSelectPending=false;
   if(confirm('确定要清除当前存档并开始新游戏吗？')){
     clearGame();
     G=defaultState();
@@ -2467,7 +2469,7 @@ function renderCareerCards(selectionType){
       ? (isCurrentCareer ? '' : 'selectCareer(\''+c.id+'\',false)')
       : 'selectCareer(\''+c.id+'\',true)';
     var cardClass = isCurrentCareer && selectionType==='change' ? 'career-card current-career-dim' : 'career-card';
-    html+='<div class="'+cardClass+'" onclick="'+(clickHandler||'void(0)')+'">';
+    html+='<div class="'+cardClass+'" onclick="\'+(clickHandler||\'void(0)\')+\'">';
     html+='<div class="career-card-icon">'+_ic(c.icon)+'</div>';
     html+='<div class="career-card-name">'+c.name+'</div>';
     html+='<div class="career-card-desc">'+c.desc+'</div>';
@@ -2582,7 +2584,7 @@ function refreshLearning(){
     html+='<div style="font-size:11px;color:#666;margin-top:3px;">IQ+'+c.iqBonus+' EQ+'+c.eqBonus+(c.healthBonus?' HP+'+c.healthBonus:'')+(c.moodBonus?' Mood+'+c.moodBonus:'')+' · '+c.months+'个月</div></div>';
     html+='<div style="text-align:right;flex-shrink:0;"><div style="font-size:12px;color:'+statusColor+';font-weight:600;">'+statusText+'</div>';
     if(available&&canAfford&&!G.learning.studying){
-      html+='<button class="btn btn-primary btn-sm" style="margin-top:6px;padding:5px 12px;font-size:12px;" onclick="startStudy(\''+c.id+'\')">开始学习</button>';
+      html+='<button class="btn btn-primary btn-sm" style="margin-top:6px;padding:5px 12px;font-size:12px;" onclick="startStudy(\\'\'+c.id+\'\\')">开始学习</button>';
     }
     html+='</div></div>';
   });
@@ -2690,7 +2692,7 @@ function renderLifeEvents(){
   const recent=G.lifeEvents.slice(-5).reverse();
   let html='';
   recent.forEach((ev,i)=>{
-    html+='<div class="event-item" onclick="this.classList.toggle(\'expanded\')">';
+    html+='<div class="event-item" onclick="this.classList.toggle(\\'expanded\\')">';
     html+='<div class="event-icon">'+_ic(ev.icon)+'</div>';
     html+='<div class="event-content"><div class="event-title">'+ev.title+'</div>';
     html+='<div class="event-month">第'+ev.month+'个月</div>';
@@ -2727,7 +2729,7 @@ function renderRecentMsgs(){
     const npc=NPCS[t.npcId]||{name:'未知',avatar:'❓'};
     const lastRound=t.rounds[t.rounds.length-1];
     const preview=lastRound?(lastRound.npcMsgs?lastRound.npcMsgs[lastRound.npcMsgs.length-1]:(lastRound.text||'')).substring(0,30):'';
-    html+='<div class="msg-preview-item" onclick="switchTab(\'phone\');setTimeout(()=>openThread(\''+t.id+'\'),200)">';
+    html+='<div class="msg-preview-item" onclick="switchTab(\\'phone\\');setTimeout(()=>openThread(\\'\'+t.id+\'\\'),200)">';
     html+='<div class="msg-preview-avatar">'+_avt(npc.avatar)+'</div>';
     html+='<div class="msg-preview-info"><div class="msg-preview-name">'+npc.name+'</div>';
     html+='<div class="msg-preview-text">'+preview+'</div></div>';
@@ -2775,7 +2777,7 @@ function calcPassiveIncome(){
 function renderEvents(){
   const area=document.getElementById('eventArea');
   if(!G.events||G.events.length===0){area.innerHTML='';return;}
-  area.innerHTML=G.events.map((e,i)=>'<div class="event-banner event-'+e.type+'" onclick="dismissEvent('+i+')" style="cursor:pointer;">'+e.text+' <span style="float:right;opacity:0.6;">✕</span></div>').join('');
+  area.innerHTML=G.events.map((e,i)=>'<div class="event-banner event-'+e.type+'" onclick="dismissEvent(\'+i+\')" style="cursor:pointer;">'+e.text+' <span style="float:right;opacity:0.6;">✕</span></div>').join('');
 }
 function dismissEvent(idx){
   if(G.events&&G.events.length>idx){
@@ -2872,12 +2874,7 @@ async function nextMonth(){
         if(t.status!=='replied'&&t.rounds[t.currentRound]&&!t.rounds[t.currentRound]._playerChoice)unreadCount++;
       });
     }
-    if(G.phone&&G.phone.chatHistory){
-      Object.keys(G.phone.chatHistory).forEach(nid=>{
-        const h=G.phone.chatHistory[nid];
-        if(h&&h.length>0){const last=h[h.length-1];if(last.npc&&!last._playerRead)unreadCount++;}
-      });
-    }
+    
 
     // Show force-advance modal
     const _existingFaModal=document.getElementById('forceAdvanceModal');
@@ -2889,7 +2886,7 @@ async function nextMonth(){
     _faModal.innerHTML=`
       <div style="background:#fff;border-radius:16px;padding:24px;max-width:320px;width:85%;text-align:center;box-shadow:0 8px 32px rgba(0,0,0,0.2)">
         <div style="font-size:40px;margin-bottom:12px">⚠️</div>
-        <div style="font-size:16px;font-weight:600;margin-bottom:8px">有 \${unreadCount} 条消息未处理</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:8px">有 ${unreadCount} 条消息未处理</div>
         <div style="font-size:13px;color:#666;margin-bottom:20px">确定要无视这些消息，强制推进到下个月吗？<br>未读消息将被标记为已读。</div>
         <div style="display:flex;flex-direction:column;gap:8px">
           <button id="faHandleBtn" style="width:100%;padding:12px;border:none;border-radius:10px;background:#f0f0f0;font-size:14px;cursor:pointer">📱 去处理消息</button>
@@ -2960,7 +2957,7 @@ async function advanceMonth(){
   if(!G._recentEvents)G._recentEvents=[]; // 连锁反应记忆（最近事件记录）
   
   // V6: 实习期逻辑
-  if(G.isInternship){
+  if(G.isInternship && !G.hasChosenCareer){
     G.internshipMonths++;
     // 实习期里程碑事件
     if(G.internshipMonths===1){
@@ -3534,7 +3531,7 @@ function showWorkScenarioModal(data,career){
   data.options.forEach(function(opt,idx){
     var effectStr=formatEffectStr(opt.effect);
     var perfStr=opt.perf!==undefined?(' <span style="font-size:11px;color:'+(opt.perf>=0?'#27ae60':'#e74c3c')+'">(绩效'+(opt.perf>=0?'+':'')+opt.perf+')</span>'):'';
-    optsHtml+='<div class="ws-option" onclick="handleWorkScenarioChoice('+idx+')">';
+    optsHtml+='<div class="ws-option" onclick="handleWorkScenarioChoice(\'+idx+\')">';
     optsHtml+='<div class="ws-option-text">'+opt.text+perfStr+'</div>';
     if(effectStr)optsHtml+='<div class="ws-option-effect">'+effectStr+'</div>';
     optsHtml+='</div>';
@@ -3702,7 +3699,7 @@ function showDecisionEvent(evt){
     if(opt.reqIQ&&G.IQ<opt.reqIQ)lockText='需要IQ≥'+opt.reqIQ;
     else if(opt.reqEQ&&G.EQ<opt.reqEQ)lockText='需要EQ≥'+opt.reqEQ;
     optionsHtml+=`
-      <div class="choice-option ${locked?'locked':''}" onclick="${locked?'':'selectDecisionOption('+evt.options.indexOf(opt)+')'}">
+      <div class="choice-option ${locked?'locked':''}" onclick="${locked?\'\':\'selectDecisionOption(\'+evt.options.indexOf(opt)+\')\'}">
         <div class="choice-option-icon">${opt.icon}</div>
         <div class="choice-option-body">
           <div class="choice-option-title">${opt.title}</div>
@@ -3862,7 +3859,7 @@ function renderLuxuryArea(){
         <div class="luxury-price">${owned?'✅ 已拥有':fmt(item.price)}</div>
       </div>
       <div class="luxury-desc">${item.desc}</div>
-      ${owned?'':'<button class="btn btn-warning btn-sm mt-8" onclick="buyLuxury(\''+item.id+'\')">购买</button>'}
+      ${owned?'':'<button class="btn btn-warning btn-sm mt-8" onclick="buyLuxury(\\'\'+item.id+\'\\')">购买</button>'}
     </div>`;
   }).join('');
   if(luxuryHtml){
@@ -4038,7 +4035,7 @@ function refreshWork(){
           var salaryDiff=o.salary-job.salary;
           var diffColor=salaryDiff>0?'#27ae60':salaryDiff<0?'#e74c3c':'#666';
           var diffIcon=salaryDiff>0?'📈':salaryDiff<0?'📉':'➡️';
-          html+='<div style="background:#fff;border-radius:6px;padding:8px 10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="showOfferDetail(\''+o.id+'\')">';
+          html+='<div style="background:#fff;border-radius:6px;padding:8px 10px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="showOfferDetail(\\'\'+o.id+\'\\')">';
           html+='<div>';
           html+='<div style="font-size:12px;font-weight:600;color:#333;">'+o.company+' · '+o.title+'</div>';
           html+='<div style="font-size:11px;color:#666;margin-top:2px;">💰 ¥'+fmt(o.salary)+'/年 <span style="color:'+diffColor+'">'+diffIcon+''+(salaryDiff>0?'+':'')+fmt(salaryDiff)+'</span> · ⏰ '+remain+'个月</div>';
@@ -4065,7 +4062,7 @@ function refreshWork(){
         const locked=isNext&&!canPromote;
         let action='';
         if(isCurrent)action='<span class="tag tag-blue">在职</span>';
-        else if(canPromote)action='<button class="btn btn-primary btn-sm" onclick="tryPromote('+i+')">晋升</button>';
+        else if(canPromote)action='<button class="btn btn-primary btn-sm" onclick="tryPromote(\'+i+\')">晋升</button>';
         else if(i<G.jobIndex)action='<span class="text-sm text-muted">已过</span>';
         else if(locked){
           const reasons=[];
@@ -4176,7 +4173,7 @@ function refreshStock(){
         newsTag=relatedNews.type==='good'?'<span class="tag tag-green" style="margin-left:6px;font-size:10px;">利好</span>':'<span class="tag tag-red" style="margin-left:6px;font-size:10px;">利空</span>';
       }
     }
-    html+='<div class="list-item" style="flex-wrap:wrap;overflow:hidden;"><div class="list-info" style="width:100%;min-width:0;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="name" style="font-size:15px;font-weight:600;">'+s.name+'</span>'+newsTag+'</div><div style="display:flex;align-items:baseline;gap:8px;"><span class="stock-price '+cls+'">¥'+price.toFixed(2)+'</span><span class="stock-change '+cls+'" style="font-size:13px;font-weight:600;">'+(change>0?'+':'')+change+'%</span></div><div style="font-size:12px;color:var(--text-light);margin-top:4px;">持有 '+hold+' 股</div></div><div class="list-action" style="width:100%;display:flex;gap:8px;margin-top:8px;padding:0 2px;box-sizing:border-box;"><button class="btn btn-danger btn-sm" style="flex:1;min-width:0;font-size:12px;" onclick="stockSell(\''+s.code+'\')" '+(hold<=0?'disabled':'')+'>'+String.fromCharCode(21334)+String.fromCharCode(20986)+'</button><button class="btn btn-success btn-sm" style="flex:1;min-width:0;font-size:12px;" onclick="stockBuy(\''+s.code+'\')" '+(maxBuy<=0?'disabled':'')+'>'+String.fromCharCode(20080)+String.fromCharCode(20837)+'</button></div></div>';
+    html+='<div class="list-item" style="flex-wrap:wrap;overflow:hidden;"><div class="list-info" style="width:100%;min-width:0;"><div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;"><span class="name" style="font-size:15px;font-weight:600;">'+s.name+'</span>'+newsTag+'</div><div style="display:flex;align-items:baseline;gap:8px;"><span class="stock-price '+cls+'">¥'+price.toFixed(2)+'</span><span class="stock-change '+cls+'" style="font-size:13px;font-weight:600;">'+(change>0?'+':'')+change+'%</span></div><div style="font-size:12px;color:var(--text-light);margin-top:4px;">持有 '+hold+' 股</div></div><div class="list-action" style="width:100%;display:flex;gap:8px;margin-top:8px;padding:0 2px;box-sizing:border-box;"><button class="btn btn-danger btn-sm" style="flex:1;min-width:0;font-size:12px;" onclick="stockSell(\\'\'+s.code+\'\\')" '+(hold<=0?'disabled':'')+'>'+String.fromCharCode(21334)+String.fromCharCode(20986)+'</button><button class="btn btn-success btn-sm" style="flex:1;min-width:0;font-size:12px;" onclick="stockBuy(\\'\'+s.code+\'\\')" '+(maxBuy<=0?'disabled':'')+'>'+String.fromCharCode(20080)+String.fromCharCode(20837)+'</button></div></div>';
   });
   document.getElementById('stockList').innerHTML=html;
   let holdHtml='';let totalVal=0;
@@ -4292,7 +4289,7 @@ function refreshHouse(){
     let action='';
     if(owned){const tagCls=owned.loan?'tag-orange':'tag-green';action='<span class="tag '+tagCls+'">'+(owned.loan?'按揭中':'已拥有')+'</span>';}
     else if(locked)action='<span class="text-sm text-muted">🔒 资产'+fmtShort(h.unlockAsset)+'</span>';
-    else action='<button class="btn btn-primary btn-sm" onclick="buyHouse(\''+h.id+'\')">购买</button>';
+    else action='<button class="btn btn-primary btn-sm" onclick="buyHouse(\\'\'+h.id+\'\\')">购买</button>';
     html+='<div class="list-item"><div class="list-info"><div class="name">'+h.name+' <span class="text-sm text-muted">'+h.area+'㎡</span></div><div class="desc">价格：'+fmt(h.price)+' | 月租：'+fmt(h.rent)+'/月</div></div><div class="list-action">'+action+'</div></div>';
   });
   document.getElementById('houseList').innerHTML=html;
@@ -4300,7 +4297,7 @@ function refreshHouse(){
   G.houses.forEach(h=>{
     const info=HOUSES.find(x=>x.id===h.id);if(info)totalRent+=info.rent;
     let detail='估值：'+fmt(h.marketValue);if(h.loan)detail+=' | 月供：'+fmt(h.loanMonthly);
-    myHtml+='<div class="list-item"><div class="list-info"><div class="name">'+(info?info.name:h.id)+'</div><div class="desc">'+detail+'</div></div><div class="list-action"><button class="btn btn-danger btn-sm" onclick="sellHouse(\''+h.id+'\')">出售</button></div></div>';
+    myHtml+='<div class="list-item"><div class="list-info"><div class="name">'+(info?info.name:h.id)+'</div><div class="desc">'+detail+'</div></div><div class="list-action"><button class="btn btn-danger btn-sm" onclick="sellHouse(\\'\'+h.id+\'\\')">出售</button></div></div>';
   });
   if(!myHtml)myHtml='<div class="text-center text-sm text-muted" style="padding:16px 0;">暂无房产</div>';
   else myHtml+='<div class="divider"></div><div class="flex-between"><span class="text-sm">每月租金收入</span><span style="font-weight:600;color:var(--success);">+'+fmt(totalRent)+'/月</span></div>';
@@ -4370,9 +4367,9 @@ function refreshBusiness(){
       action='<span style="font-size:12px;color:'+(profit>=0?'#27ae60':'#e74c3c')+';">净利润 '+fmt(profit)+'</span>';
     }
     else if(locked)action='<span class="text-sm text-muted">🔒 资产'+fmtShort(b.unlockAsset)+'</span>';
-    else action='<button class="btn btn-primary btn-sm" onclick="buyBusiness(\''+b.id+'\')">加盟 '+fmt(b.price)+'</button>';
+    else action='<button class="btn btn-primary btn-sm" onclick="buyBusiness(\\'\'+b.id+\'\\')">加盟 '+fmt(b.price)+'</button>';
     const clickAction=owned?'openBusinessDetail(\''+b.id+'\')':'';
-    html+='<div class="list-item" style="'+(owned?'cursor:pointer;':'')+'" '+(clickAction?'onclick="'+clickAction+'"':'')+'>';
+    html+='<div class="list-item" style="'+(owned?'cursor:pointer;':'')+'" '+(clickAction?'onclick="\'+clickAction+\'"':'')+'>';
     html+='<div class="list-info"><div class="name">'+_ic(b.icon)+' '+b.name+'</div>';
     html+='<div class="desc">投入：'+fmt(b.price)+' | 风险：'+Math.round(b.risk*100)+'% | 月收入：'+fmt(b.monthlyIncome[0])+'~'+fmt(b.monthlyIncome[1])+'</div>';
     if(owned){
@@ -4385,7 +4382,7 @@ function refreshBusiness(){
   G.businesses.forEach(b=>{
     const info=BUSINESSES.find(x=>x.id===b.id);if(!info)return;
     const profit=(b.totalIncome||0)-(b.totalLoss||0);
-    myHtml+='<div class="list-item" onclick="openBusinessDetail(\''+b.id+'\')" style="cursor:pointer;">';
+    myHtml+='<div class="list-item" onclick="openBusinessDetail(\\'\'+b.id+\'\\')" style="cursor:pointer;">';
     myHtml+='<div class="list-info"><div class="name">'+_ic(info.icon)+' '+info.name+'</div>';
     myHtml+='<div class="desc">投入：'+fmt(info.price)+' | 持有'+(b.monthsOwned||0)+'个月</div>';
     myHtml+='<div class="desc" style="font-size:11px;">收'+fmt(b.totalIncome||0)+' 亏'+fmt(b.totalLoss||0)+' 利'+fmt(profit)+'</div>';
@@ -4431,7 +4428,7 @@ function refreshTech(){
     const active=G.techInvestments.find(x=>x.id===t.id);
     let action='';
     if(active)action='<span class="tag tag-blue">投资中 ('+active.monthsRemaining+'月)</span>';
-    else action='<button class="btn btn-primary btn-sm" onclick="investTech(\''+t.id+'\')">投资 '+fmt(t.minInvest)+'</button>';
+    else action='<button class="btn btn-primary btn-sm" onclick="investTech(\\'\'+t.id+\'\\')">投资 '+fmt(t.minInvest)+'</button>';
     const maxMult=t.outcomes.reduce((m,o)=>Math.max(m,o.multiplier),0);
     var riskColor=t.id==='ai'?'#e74c3c':t.id==='energy'?'#f39c12':'#27ae60';
     html+='<div class="list-item"><div class="list-info"><div class="name">'+t.name+' <span style="font-size:10px;color:'+riskColor+';border:1px solid '+riskColor+';padding:1px 4px;border-radius:3px;">'+(t.type||'')+'</span></div><div class="desc">最低投入：'+fmt(t.minInvest)+' | 周期：'+t.returnMonths+'月 | 最高回报：'+maxMult+'x</div></div><div class="list-action">'+action+'</div></div>';
@@ -4442,7 +4439,7 @@ function refreshTech(){
     const tech=TECH_INVESTMENTS.find(x=>x.id===t.id);if(!tech)return;
     const pct=Math.round(((tech.returnMonths-t.monthsRemaining)/tech.returnMonths)*100);
     const pendingCount=t.events?t.events.filter(e=>!e.resolved).length:0;
-    myHtml+='<div class="list-item" onclick="openProjectDetail(\''+t.id+'\')" style="cursor:pointer;">';
+    myHtml+='<div class="list-item" onclick="openProjectDetail(\\'\'+t.id+\'\\')" style="cursor:pointer;">';
     myHtml+='<div class="list-info"><div class="name">'+tech.icon+' '+tech.name;
     if(pendingCount>0)myHtml+=' <span style="background:#e74c3c;color:#fff;font-size:10px;padding:1px 6px;border-radius:8px;">'+pendingCount+'待处理</span>';
     myHtml+='</div><div class="desc">投入：'+fmt(t.investAmount)+' | 进度：'+pct+'% | 剩余：'+t.monthsRemaining+'月</div></div>';
@@ -4585,7 +4582,7 @@ function openProjectDetail(projectId){
       html+='<div style="font-weight:500;font-size:13px;">'+evt.title+'</div>';
       html+='<div style="font-size:12px;color:#666;margin:4px 0;">'+evt.desc+'</div>';
       evt.options.forEach((opt,oi)=>{
-        html+='<div style="background:#fff;padding:8px;border-radius:6px;margin-top:6px;cursor:pointer;border:1px solid #e9ecef;" onclick="resolveProjectEvent(\''+projectId+'\','+idx+','+oi+')">';
+        html+='<div style="background:#fff;padding:8px;border-radius:6px;margin-top:6px;cursor:pointer;border:1px solid #e9ecef;" onclick="resolveProjectEvent(\\'\'+projectId+\'\\',\'+idx+\',\'+oi+\')">';
         html+='<span style="font-size:13px;">'+opt.text+'</span>';
         if(opt.cost)html+=' <span style="font-size:11px;color:#e74c3c;">('+fmt(opt.cost)+')</span>';
         html+='</div>';
@@ -4751,7 +4748,7 @@ function showRebirthPanel(){
     const canBuy=!owned&&(G.legacyPoints||0)>=u.cost;
     html+='<div class="upgrade-item"><div><span class="upgrade-name">'+u.name+'</span>';if(u.detail)html+='<span class="text-sm text-muted" style="margin-left:8px;font-style:italic;">'+u.detail+'</span>';html+='</div>';
     if(owned)html+='<span class="tag tag-green">已拥有</span>';
-    else html+='<button class="btn btn-sm '+(canBuy?'btn-warning':'btn-outline')+'" '+(canBuy?'':'disabled')+' onclick="buyLegacy(\''+u.id+'\')">'+u.cost+' LP</button>';
+    else html+='<button class="btn btn-sm '+(canBuy?'btn-warning':'btn-outline')+'" '+(canBuy?'':'disabled')+' onclick="buyLegacy(\\'\'+u.id+\'\\')">'+u.cost+' LP</button>';
     html+='</div>';
   });
   document.getElementById('upgradeList').innerHTML=html;
@@ -5836,7 +5833,7 @@ function startEncounterScene(sceneKey){
   // 选项按钮
   html += '<div id="encounterChoices">';
   scene.choices.forEach(function(choice,i){
-    html += '<button onclick="handleEncounterChoice('+i+')" style="display:block;width:100%;text-align:left;padding:10px 14px;margin:6px 0;background:white;border:1.5px solid #e8e8e8;border-radius:10px;font-size:13px;color:#333;cursor:pointer;">'+choice.text+'</button>';
+    html += '<button onclick="handleEncounterChoice(\'+i+\')" style="display:block;width:100%;text-align:left;padding:10px 14px;margin:6px 0;background:white;border:1.5px solid #e8e8e8;border-radius:10px;font-size:13px;color:#333;cursor:pointer;">'+choice.text+'</button>';
   });
   html += '</div>';
   html += '<div id="encounterResult" style="display:none;"></div>';
@@ -6184,7 +6181,7 @@ function showGroupSelector(npcId){
   html+='<div>';
   (G.friendGroups||[]).forEach(g=>{
     const sel=g.id===currentGroup?'selected':'';
-    html+='<div class="group-select-item '+sel+'" onclick="doSetNpcGroup(\''+npcId+'\',\''+g.id+'\')">';
+    html+='<div class="group-select-item '+sel+'" onclick="doSetNpcGroup(\\'\'+npcId+\'\\',\\'\'+g.id+\'\\')">';
     html+='<span class="gs-icon">'+_ic(g.icon)+'</span>';
     html+='<span class="gs-name" style="color:'+g.color+'">'+g.name+'</span>';
     if(g.id===currentGroup) html+='<span>✓</span>';
@@ -6230,7 +6227,7 @@ function renderManageGroupsModal(overlay){
     html+='<span class="mg-icon">'+_ic(g.icon)+'</span>';
     html+='<span class="mg-name" style="color:'+g.color+'">'+g.name+'</span>';
     html+='<span style="font-size:11px;color:#999;">('+count+'人)</span>';
-    if(!g.isDefault) html+='<span class="mg-del" onclick="doDeleteGroup(\''+g.id+'\')">删除</span>';
+    if(!g.isDefault) html+='<span class="mg-del" onclick="doDeleteGroup(\\'\'+g.id+\'\\')">删除</span>';
     html+='</div>';
   });
   html+='</div>';
@@ -6326,7 +6323,7 @@ function renderContacts(){
     const npcIds=groupNpcMap[gid]||[];
     const isCollapsed=collapsedStates[gid]?true:false;
     const toggleIcon=isCollapsed?'▶':'▼';
-    html+='<div class="friend-group-header '+(isCollapsed?'collapsed':'')+'" onclick="toggleFriendGroup(\''+gid+'\')">';
+    html+='<div class="friend-group-header '+(isCollapsed?'collapsed':'')+'" onclick="toggleFriendGroup(\\'\'+gid+\'\\')">';
     html+='<span class="friend-group-toggle">'+toggleIcon+'</span>';
     html+='<span>'+_ic(grp.icon)+' '+grp.name+'</span>';
     html+='<span class="friend-group-count">'+npcIds.length+'人</span>';
@@ -6354,12 +6351,12 @@ function renderContacts(){
       const groupId=G.friendGroupings[npcId]||'acquaintance';
       const curGrp=getFriendGroup(groupId);
       
-      html+='<div class="contact-item" onclick="openProactiveChat(\''+npcId+'\')">';
+      html+='<div class="contact-item" onclick="openProactiveChat(\\'\'+npcId+\'\\')">';
       html+='<div class="contact-avatar"><img src="'+p.avatar+'" class="friend-avatar-img"></div>';
       html+='<div class="contact-info"><div class="contact-name">'+p.name+' <span style="font-size:11px;color:'+relDef.color+';">'+_ic(relDef.icon)+' '+relDef.label+'</span></div>';
-      html+='<div class="contact-status">亲密度 '+rel.intimacy+' · 信任 '+rel.trust+' · 好感 '+(rel.affection||0)+' <span class="contact-group-badge" onclick="event.stopPropagation();showGroupSelector(\''+npcId+'\')" style="background:'+(curGrp?curGrp.color:'#95a5a6')+'22;color:'+(curGrp?curGrp.color:'#95a5a6')+';margin-left:4px;">'+(curGrp?curGrp.icon:'')+' '+(curGrp?curGrp.name:'点头之交')+'</span></div></div>';
+      html+='<div class="contact-status">亲密度 '+rel.intimacy+' · 信任 '+rel.trust+' · 好感 '+(rel.affection||0)+' <span class="contact-group-badge" onclick="event.stopPropagation();showGroupSelector(\\'\'+npcId+\'\\')" style="background:'+(curGrp?curGrp.color:'#95a5a6')+'22;color:'+(curGrp?curGrp.color:'#95a5a6')+';margin-left:4px;">'+(curGrp?curGrp.icon:'')+' '+(curGrp?curGrp.name:'点头之交')+'</span></div></div>';
       if(hasNew)html+='<div style="width:8px;height:8px;border-radius:50%;background:#27ae60;flex-shrink:0;"></div>';
-      html+='<div class="contact-detail-btn" onclick="event.stopPropagation();showContactDetail(\''+npcId+'\')" style="font-size:14px;padding:2px 6px;cursor:pointer;color:#3498db;font-weight:700;">ℹ️</div>';html+='<div class="contact-arrow">›</div></div>';
+      html+='<div class="contact-detail-btn" onclick="event.stopPropagation();showContactDetail(\\'\'+npcId+\'\\')" style="font-size:14px;padding:2px 6px;cursor:pointer;color:#3498db;font-weight:700;">ℹ️</div>';html+='<div class="contact-arrow">›</div></div>';
     });
     html+='</div>';
   });
@@ -6523,7 +6520,7 @@ async function startProactiveChatWith(npcId,greetingIdx){
   let optsHtml='';
   const followups=chat.followups.slice(0,3);
   followups.forEach((f,i)=>{
-    optsHtml+='<div class="chat-opt" onclick="continueProactiveChat(\''+npcId+'\','+i+')">💬 '+f+'</div>';
+    optsHtml+='<div class="chat-opt" onclick="continueProactiveChat(\\'\'+npcId+\'\\',\'+i+\')">💬 '+f+'</div>';
   });
   optsHtml+='<div class="chat-opt" onclick="endProactiveChat()" style="color:#999;">👋 结束对话</div>';
   opts.innerHTML=optsHtml;
@@ -6550,7 +6547,7 @@ async function continueProactiveChat(npcId,followupIdx){
   let optsHtml='';
   if(chat.followups.length>0){
     chat.followups.slice(0,3).forEach((f,i)=>{
-      optsHtml+='<div class="chat-opt" onclick="continueProactiveChat(\''+npcId+'\','+i+')">💬 '+f+'</div>';
+      optsHtml+='<div class="chat-opt" onclick="continueProactiveChat(\\'\'+npcId+\'\\',\'+i+\')">💬 '+f+'</div>';
     });
   }else{
     optsHtml+='<div style="text-align:center;color:#999;font-size:12px;padding:8px;">'+p.name+'：没什么好聊的了</div>';
@@ -6614,7 +6611,7 @@ function showLearningPanel(){
     html+='<div class="text-sm" style="margin-top:2px;">IQ+'+c.iqBonus+' EQ+'+c.eqBonus+(c.healthBonus?' HP+'+c.healthBonus:'')+' · '+c.months+'个月</div></div>';
     html+='<div style="text-align:right;"><div style="font-size:12px;color:'+statusColor+';font-weight:500;">'+statusText+'</div>';
     if(available&&canAfford&&!G.learning.studying){
-      html+='<button class="btn btn-primary btn-sm" style="margin-top:4px;padding:4px 10px;font-size:12px;" onclick="startStudy(\''+c.id+'\')">开始学习</button>';
+      html+='<button class="btn btn-primary btn-sm" style="margin-top:4px;padding:4px 10px;font-size:12px;" onclick="startStudy(\\'\'+c.id+\'\\')">开始学习</button>';
     }
     html+='</div></div>';
   });
@@ -7018,7 +7015,7 @@ function renderPhoneList(){
   allItems.forEach(item=>{
     const cls=item.unread?'msg-item msg-unread':'msg-item msg-read';
     const pvCls=item.unread?'msg-pv msg-pv-unread':'msg-pv';
-    html+='<div class="'+cls+'" onclick="'+item.onclick+'">';
+    html+='<div class="'+cls+'" onclick="\'+item.onclick+\'">';
     html+='<div class="msg-av">'+_avt(item.avatar)+'</div>';
     if(item.unread)html+='<div class="unread-dot"></div>';
     html+='<div class="msg-bd"><div class="msg-nm">'+item.name+'</div>';
@@ -7110,7 +7107,7 @@ function renderChat(){
         if(o.reqIQ&&G.IQ<o.reqIQ)label+=' (需IQ≥'+o.reqIQ+')';
         if(o.reqEQ&&G.EQ<o.reqEQ)label+=' (需EQ≥'+o.reqEQ+')';
         const locked=(o.reqIQ&&G.IQ<o.reqIQ)||(o.reqEQ&&G.EQ<o.reqEQ);
-        ohtml+='<div class="chat-opt'+(locked?' locked':'')+'" onclick="'+(locked?'':'selectPhoneOption('+i+')')+'">'+label+'</div>';
+        ohtml+='<div class="chat-opt'+(locked?' locked':'')+'" onclick="\'+(locked?\'\':\'selectPhoneOption(\'+i+\')\')+\'">'+label+'</div>';
       });
       opts.innerHTML=ohtml;
     }else{
@@ -7170,7 +7167,12 @@ async function selectPhoneOption(optIdx){
           setTimeout(()=>{showScheduleConfirm(sNpc,sInfo);},800);
         }
       }
-    }catch(e){removeTypingIndicator();}
+    }catch(e){
+        removeTypingIndicator();
+        // Fallback: 显示默认NPC回复
+        nextRound.npcMsgs=['好的，我知道了。'];
+        showToast('💬 '+(thread.npcName||'对方')+'回复了');
+      }
     // v3.15.3: 日程线程选择后显示场景结果
     if(opt._scheduleResult){
       setTimeout(()=>{showToast('✨ '+opt._scheduleResult);},600);
@@ -7196,7 +7198,14 @@ async function selectPhoneOption(optIdx){
         if(aiReply){nextRound.npcMsgs=[aiReply];}
       }catch(e){
         removeTypingIndicator();
-        
+        // Fallback: 显示默认消息
+        const p=NPC_PERSONALITIES[npcId];
+        const fbText = (p&&p.followups)?p.followups[0]:'好的...';
+        chatBody.insertAdjacentHTML('beforeend','<div class="chat-bub npc">'+fbText+'</div>');
+        body.scrollTop=body.scrollHeight;
+        // 更新选项
+        const opts=document.getElementById('chatOpts');
+        opts.innerHTML='<div class="chat-opt" onclick="endProactiveChat()" style="color:#999;">👋 结束对话</div>';
       }
     }
     showToast('💬 还有后续消息需要回复');
@@ -8113,9 +8122,9 @@ async function _doSendMessage(msg,npcId){
       _optsEl.style.display='flex';
       var _ohtml='';
       _optChoices.forEach(function(_opt,_idx){
-        _ohtml+='<div class="chat-opt" onclick="_optSendByIdx('+_idx+')">\u2708 '+_opt+'</div>';
+        _ohtml+='<div class="chat-opt" onclick="_optSendByIdx(\'+_idx+\')">\u2708 '+_opt+'</div>';
       });
-      _ohtml+='<div class="chat-opt" style="color:#999;border-style:dashed;" onclick="document.getElementById(\'chatInputField\').focus()">\u2328 \u81ea\u5df1\u8f93\u5165</div>';
+      _ohtml+='<div class="chat-opt" style="color:#999;border-style:dashed;" onclick="document.getElementById(\\'chatInputField\\').focus()">\u2328 \u81ea\u5df1\u8f93\u5165</div>';
       _optsEl.innerHTML=_ohtml;
     }
   }
@@ -8318,17 +8327,17 @@ function renderMoments(){
       }
       // Action buttons
       html+='<div class="moment-acts">';
-      html+='<div class="moment-act '+(m.playerLiked?'liked':'')+'" onclick="likeAIGMoment('+m.id+')">'+(m.playerLiked?'❤️':'🤍')+' '+(m.playerLiked?likedNpcs.length+1:likedNpcs.length)+'</div>';
-      html+='<div class="moment-act" onclick="showMomentCommentInput('+m.id+')">💬 评论</div>';
+      html+='<div class="moment-act '+(m.playerLiked?'liked':'')+'" onclick="likeAIGMoment(\'+m.id+\')">'+(m.playerLiked?'❤️':'🤍')+' '+(m.playerLiked?likedNpcs.length+1:likedNpcs.length)+'</div>';
+      html+='<div class="moment-act" onclick="showMomentCommentInput(\'+m.id+\')">💬 评论</div>';
       html+='</div>';
       // Comment input area (hidden by default)
       html+='<div id="moment-input-'+m.id+'" style="display:none;margin-top:8px;">';
       html+='<div class="moment-input-wrap">';
       html+='<input class="moment-input" id="moment-tf-'+m.id+'" placeholder="写评论...">';
-      html+='<button class="moment-send" onclick="submitMomentComment('+m.id+')">发送</button>';
+      html+='<button class="moment-send" onclick="submitMomentComment(\'+m.id+\')">发送</button>';
       html+='</div></div>';
       // "Ask NPC about this" button
-      html+='<div class="moment-ask" onclick="askAboutMoment('+m.id+')">💬 问问TA这件事</div>';
+      html+='<div class="moment-ask" onclick="askAboutMoment(\'+m.id+\')">💬 问问TA这件事</div>';
     }else{
       // Template moments: NPC comments + likes + comment input
       const comments=m.comments||[];
@@ -8347,14 +8356,14 @@ function renderMoments(){
         html+='<div class="moment-likes">❤️ '+(m.liked?'你, ':'')+likedNpcs.join('、')+' 觉得很赞</div>';
       }
       html+='<div class="moment-acts">';
-      html+='<div class="moment-act '+(m.liked?'liked':'')+'" onclick="likeMoment('+m.id+')">'+(m.liked?'❤️':'🤍')+' '+(likedNpcs.length+(m.liked?1:0))+'</div>';
-      html+='<div class="moment-act" onclick="showMomentInput('+m.id+')">💬 评论</div>';
+      html+='<div class="moment-act '+(m.liked?'liked':'')+'" onclick="likeMoment(\'+m.id+\')">'+(m.liked?'❤️':'🤍')+' '+(likedNpcs.length+(m.liked?1:0))+'</div>';
+      html+='<div class="moment-act" onclick="showMomentInput(\'+m.id+\')">💬 评论</div>';
       html+='</div>';
       // Pre-rendered comment input area (hidden by default)
       html+='<div id="moment-input-'+m.id+'" style="display:none;margin-top:8px;">';
       html+='<div class="moment-input-wrap">';
       html+='<input class="moment-input" id="moment-tf-'+m.id+'" placeholder="写评论...">';
-      html+='<button class="moment-send" onclick="submitMomentComment('+m.id+')">发送</button>';
+      html+='<button class="moment-send" onclick="submitMomentComment(\'+m.id+\')">发送</button>';
       html+='</div></div>';
     }
     html+='</div>';
@@ -8362,7 +8371,7 @@ function renderMoments(){
   el.innerHTML=html+_htmlPostPanel();
 }
 
-function _htmlPostPanel(){return '<div class="moments-panel" id="momentsPanel"><div class="moments-panel-hdr"><button onclick="hidePostPanel()">取消</button><span class="hdr-title">发朋友圈</span><button onclick="submitMoment()" id="momentsSubmitBtn">发布</button></div><textarea class="moments-ta" id="momentsTa" placeholder="此刻的想法..." oninput="this.nextElementSibling.textContent=this.value.length+\'/200\'" maxlength="200"></textarea><div class="moments-char-count">0/200</div><div class="moments-ai-bar"><button class="moments-ai-btn" onclick="aiGenerateMoment(\'career\')"><span class="ai-icon">💼</span>职场视角</button><button class="moments-ai-btn" onclick="aiGenerateMoment(\'mood\')"><span class="ai-icon">🎭</span>当下心情</button><button class="moments-ai-btn" onclick="aiGenerateMoment(\'brag\')"><span class="ai-icon">✨</span>凡尔赛</button></div></div>';}
+function _htmlPostPanel(){return '<div class="moments-panel" id="momentsPanel"><div class="moments-panel-hdr"><button onclick="hidePostPanel()">取消</button><span class="hdr-title">发朋友圈</span><button onclick="submitMoment()" id="momentsSubmitBtn">发布</button></div><textarea class="moments-ta" id="momentsTa" placeholder="此刻的想法..." oninput="this.nextElementSibling.textContent=this.value.length+\'/200\'" maxlength="200"></textarea><div class="moments-char-count">0/200</div><div class="moments-ai-bar"><button class="moments-ai-btn" onclick="aiGenerateMoment(\\'career\\')"><span class="ai-icon">💼</span>职场视角</button><button class="moments-ai-btn" onclick="aiGenerateMoment(\\'mood\\')"><span class="ai-icon">🎭</span>当下心情</button><button class="moments-ai-btn" onclick="aiGenerateMoment(\\'brag\\')"><span class="ai-icon">✨</span>凡尔赛</button></div></div>';}
 
 function likeMoment(id){
   if(!G.phone)return;
@@ -8390,7 +8399,7 @@ function commentMoment(id){
   const inputDiv=document.createElement('div');
   inputDiv.id='moment-input-'+id;
   inputDiv.style.cssText='margin-top:8px;';
-  inputDiv.innerHTML='<div class="moment-input-wrap"><input class="moment-input" id="moment-tf-'+id+'" placeholder="写评论..."><button class="moment-send" onclick="submitMomentComment('+id+')">发送</button></div>';
+  inputDiv.innerHTML='<div class="moment-input-wrap"><input class="moment-input" id="moment-tf-'+id+'" placeholder="写评论..."><button class="moment-send" onclick="submitMomentComment(\'+id+\')">发送</button></div>';
   const acts=card.querySelector('.moment-acts');
   if(acts)acts.insertAdjacentElement('afterend',inputDiv);
 }
@@ -8417,7 +8426,7 @@ function renderNotifications(){
   G.phone.notifications.forEach(n=>{
     const bgCls=n.type==='achievement'?'#fef9e7':n.type==='stock'?'#d5f5e3':n.type==='warning'?'#fadbd8':'#d6eaf8';
     const cls=n.read?'notif-item read':'notif-item unread';
-    html+='<div class="'+cls+'" onclick="markNotifRead('+n.id+')">';
+    html+='<div class="'+cls+'" onclick="markNotifRead(\'+n.id+\')">';
     html+='<div class="notif-ic" style="background:'+bgCls+';">'+_ic(n.icon)+'</div>';
     html+='<div class="notif-body"><div class="notif-txt">'+n.text+'</div>';
     html+='<div class="notif-tm">'+getTimeStr(n.month)+'</div></div>';
@@ -9119,7 +9128,7 @@ if(_origTriggerStockNews){
   };
 }
 
-function showToast(msg,dur){const el=document.getElementById('toastEl');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),dur||1800);}
+function showToast(msg,dur){const el=document.getElementById('toastEl');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=null;toastTimer=setTimeout(()=>el.classList.remove('show'),dur||1800);}
 
 // ====== AGE DISPLAY ======
 function updateAgeDisplay(){var age=G.age||18;var lifeExpect=80;var pct=Math.min(100,(age/lifeExpect)*100);var el=document.getElementById('ageBar');if(!el)return;el.innerHTML='<span class="cur-age">'+Math.floor(age)+'岁</span><div class="life-prog"><div class="life-prog-fill" style="width:'+pct+'%"></div></div><span class="life-pct">'+Math.floor(pct)+'%</span>'}
@@ -9412,7 +9421,7 @@ function refreshCareer(){
           '<div class="name">💼 '+offer.company+' <span class="text-sm text-muted">'+fmt(offer.salary)+'/年</span></div>'+
           '<div class="desc">要求：IQ≥'+offer.requirement.IQ+' EQ≥'+offer.requirement.EQ+(offer.equity?' 📦含股权':'')+(offer.stability?' 🛡️稳定':'')+'</div>'+
         '</div>'+
-        '<div class="list-action"><button class="btn btn-'+(canAccept?'success':'outline')+' btn-sm" onclick="applyJobOffer('+idx+')" '+(canAccept?'':'disabled')+'>'+(canAccept?'接受':'条件不足')+'</button></div>'+
+        '<div class="list-action"><button class="btn btn-'+(canAccept?'success':'outline')+' btn-sm" onclick="applyJobOffer(\'+idx+\')" '+(canAccept?'':'disabled')+'>'+(canAccept?'接受':'条件不足')+'</button></div>'+
       '</div>';
     });
   }else{
@@ -9549,7 +9558,7 @@ function renderChoiceEvent(evt){
     if(opt.reqEQ&&G.EQ<opt.reqEQ){locked=true;lockReason=lockReason?'多项不足':'EQ需'+opt.reqEQ;}
     if(opt.reqCash&&G.cash<opt.reqCash){locked=true;lockReason=lockReason?'多项不足':'需要'+fmt(opt.reqCash);}
     optionsHtml+='<div class="choice-option'+(locked?' locked':'')+'"';
-    if(!locked)optionsHtml+=' onclick="resolveChoiceEvent('+idx+')"';
+    if(!locked)optionsHtml+=' onclick="resolveChoiceEvent(\'+idx+\')"';
     optionsHtml+='>'+
       '<div class="choice-option-icon">'+_ic(opt.icon)+'</div>'+
       '<div class="choice-option-body">'+
@@ -9870,8 +9879,8 @@ function showOBStep(idx){
         '<div class="ob-title">'+step.title+'</div>'+
         '<div class="ob-body">'+step.body+'</div>'+
         '<div class="ob-actions">'+
-          (idx>0?'<button class="btn-prev" onclick="showOBStep('+(idx-1)+')">← 上一步</button>':'<span></span>')+
-          '<button class="btn-next" onclick="showOBStep('+(idx+1)+')">'+step.btnText+' →</button>'+
+          (idx>0?'<button class="btn-prev" onclick="showOBStep(\'+(idx-1)+\')">← 上一步</button>':'<span></span>')+
+          '<button class="btn-next" onclick="showOBStep(\'+(idx+1)+\')">'+step.btnText+' →</button>'+
         '</div>'+
       '</div>'+
       '<button class="ob-skip" onclick="skipOnboarding()">跳过引导</button>'+
@@ -9960,14 +9969,14 @@ function renderPetShop(){
   h+='<div class="pet-shop-hd"><h2>宠物商店</h2>';
   h+='<div class="coin">¥'+(G.cash?G.cash.toLocaleString():'0')+' &nbsp;|&nbsp; 狗粮 '+(G.petFood||0)+' 袋</div></div>';
   h+='<div class="pet-cat-bar">';
-  h+='<div class="pet-cat-btn '+(_petShopCat==='adopt'?'active':'')+'" onclick="setShopCat(\'adopt\',this)">宠物领养</div>';
-  h+='<div class="pet-cat-btn '+(_petShopCat==='food'?'active':'')+'" onclick="setShopCat(\'food\',this)">宠物食品</div>';
+  h+='<div class="pet-cat-btn '+(_petShopCat==='adopt'?'active':'')+'" onclick="setShopCat(\\'adopt\\',this)">宠物领养</div>';
+  h+='<div class="pet-cat-btn '+(_petShopCat==='food'?'active':'')+'" onclick="setShopCat(\\'food\\',this)">宠物食品</div>';
   h+='</div>';
   h+='<div class="pet-shop-grid">';
   if(_petShopCat==='adopt'){
     PET_SHOP.forEach(function(p){
       var owned=G.pets.some(function(pt){return pt.id===p.id;});
-      h+='<div class="pet-shop-item rarity-'+p.rarity+'" onclick="buyPet(\''+p.id+'\')">';
+      h+='<div class="pet-shop-item rarity-'+p.rarity+'" onclick="buyPet(\\'\'+p.id+\'\\')">';
       h+='<span class="ps-rank">'+p.rarity.toUpperCase()+'</span>';
       h+='<span class="ps-emoji">'+p.emoji+'</span>';
       h+='<div class="ps-name">'+p.name+'</div>';
@@ -10076,7 +10085,7 @@ function renderPetDetail(pet){
   var sinceInt=G.totalMonths-lastInt;
   var h='';
   h+='<div class="pet-card"><div class="pet-display">';
-  h+='<span class="pet-emoji" onclick="petPet(\''+pet.id+'\')">'+pet.emoji+'</span>';
+  h+='<span class="pet-emoji" onclick="petPet(\\'\'+pet.id+\'\\')">'+pet.emoji+'</span>';
   h+='<div class="pet-name">'+pet.name+(titleBadge?'<span class="pet-title-badge">'+titleBadge+'</span>':'')+'</div>';
   h+='<div class="pet-stage">'+ranks[pet.rarity]+' · 已养'+ageMonths+'个月</div>';
   h+='<div class="pet-age-display">🎂 宠物年龄：'+(Math.floor(ageMonths/12)>0?Math.floor(ageMonths/12)+'岁':'')+(ageMonths%12>0?(ageMonths%12)+'个月':''||'刚出生')+'</div>';
@@ -10093,32 +10102,32 @@ function renderPetDetail(pet){
   h+=petBar('亲密度',pet.intimacy,'bar-intimacy');
   h+='</div>';
   h+='<div class="pet-actions">';
-  h+='<div class="pet-btn feed" onclick="petFeed(\''+pet.id+'\')"><span class="b-icon">🍖</span><span class="b-name">喂食</span><span class="b-cost">'+(G.petFood>0?'库存'+G.petFood:'¥200')+'</span></div>';
-  h+='<div class="pet-btn" onclick="petPlay(\''+pet.id+'\')"><span class="b-icon">🎾</span><span class="b-name">玩耍</span><span class="b-cost">消耗体力</span></div>';
-  h+='<div class="pet-btn" onclick="petWash(\''+pet.id+'\')"><span class="b-icon">🛁</span><span class="b-name">洗澡</span><span class="b-cost">¥50</span></div>';
-  h+='<div class="pet-btn store" onclick="switchPetTab(\'shop\',document.getElementById(\'petSubTabs\').querySelector(\'.pet-subtab\'))"><span class="b-icon">🏪</span><span class="b-name">商店</span><span class="b-cost">逛逛</span></div>';
+  h+='<div class="pet-btn feed" onclick="petFeed(\\'\'+pet.id+\'\\')"><span class="b-icon">🍖</span><span class="b-name">喂食</span><span class="b-cost">'+(G.petFood>0?'库存'+G.petFood:'¥200')+'</span></div>';
+  h+='<div class="pet-btn" onclick="petPlay(\\'\'+pet.id+\'\\')"><span class="b-icon">🎾</span><span class="b-name">玩耍</span><span class="b-cost">消耗体力</span></div>';
+  h+='<div class="pet-btn" onclick="petWash(\\'\'+pet.id+\'\\')"><span class="b-icon">🛁</span><span class="b-name">洗澡</span><span class="b-cost">¥50</span></div>';
+  h+='<div class="pet-btn store" onclick="switchPetTab(\\'shop\\',document.getElementById(\\'petSubTabs\\').querySelector(\\'.pet-subtab\\'))"><span class="b-icon">🏪</span><span class="b-name">商店</span><span class="b-cost">逛逛</span></div>';
   h+='</div>';
   h+='<div class="pet-mini-actions">';
-  h+='<div class="pet-mini-btn" onclick="petPlayCatch(\''+pet.id+'\')"><span class="m-icon">🥏</span><span class="m-name">接飞盘</span><span class="m-cost">体力-10</span></div>';
-  h+='<div class="pet-mini-btn" onclick="petPlayMath(\''+pet.id+'\')"><span class="m-icon">🧮</span><span class="m-name">智商训练</span><span class="m-cost">智力+EQ</span></div>';
-  h+='<div class="pet-mini-btn'+(pet.energy>=30?'':' disabled')+'" onclick="'+((pet.energy>=30)?'petPlayTreasure(\''+pet.id+'\')':'')+'"><span class="m-icon">🗺️</span><span class="m-name">寻宝之旅</span><span class="m-cost">体力-30</span></div>';
+  h+='<div class="pet-mini-btn" onclick="petPlayCatch(\\'\'+pet.id+\'\\')"><span class="m-icon">🥏</span><span class="m-name">接飞盘</span><span class="m-cost">体力-10</span></div>';
+  h+='<div class="pet-mini-btn" onclick="petPlayMath(\\'\'+pet.id+\'\\')"><span class="m-icon">🧮</span><span class="m-name">智商训练</span><span class="m-cost">智力+EQ</span></div>';
+  h+='<div class="pet-mini-btn'+(pet.energy>=30?'':' disabled')+'" onclick="\'+((pet.energy>=30)?\'petPlayTreasure(\\'\'+pet.id+\'\\')\':\'\')+\'"><span class="m-icon">🗺️</span><span class="m-name">寻宝之旅</span><span class="m-cost">体力-30</span></div>';
   h+='</div>';
   h+='<div class="pet-mini-actions" style="margin-top:8px">';
   for(var ti2=0;ti2<3;ti2++){
-    h+='<div class="pet-mini-btn'+(pet.tricks[ti2]||pet.energy<10?' disabled':'')+'" onclick="'+((!pet.tricks[ti2]&&pet.energy>=10)?'petTrainTrick(\''+pet.id+'\','+ti2+')':'')+'"><span class="m-icon">'+(pet.tricks[ti2]?'✅':'📚')+'</span><span class="m-name">'+(pet.tricks[ti2]?trickNames[ti2]:'学'+trickNames[ti2])+'</span><span class="m-cost">'+(pet.tricks[ti2]?'已学会':'体力-10')+'</span></div>';
+    h+='<div class="pet-mini-btn'+(pet.tricks[ti2]||pet.energy<10?' disabled':'')+'" onclick="\'+((!pet.tricks[ti2]&&pet.energy>=10)?\'petTrainTrick(\\'\'+pet.id+\'\\',\'+ti2+\')\':\'\')+\'"><span class="m-icon">'+(pet.tricks[ti2]?'✅':'📚')+'</span><span class="m-name">'+(pet.tricks[ti2]?trickNames[ti2]:'学'+trickNames[ti2])+'</span><span class="m-cost">'+(pet.tricks[ti2]?'已学会':'体力-10')+'</span></div>';
   }
   h+='</div>';
   if(G.mood<30&&G.pets.length>0){
     h+='<div style="text-align:center;margin-top:10px;padding:8px;background:#fff3e0;border-radius:10px;font-size:12px;color:#666;">💔 你心情低落，'+pet.emoji+' '+pet.name+'似乎很担心你<button class="btn btn-sm btn-primary" style="margin-left:8px;padding:4px 12px;" onclick="petMoodToPlayer()">接受安慰</button></div>';
   }
   if(pet.mood<25){
-    h+='<div style="text-align:center;margin-top:8px;padding:8px;background:#fce4ec;border-radius:10px;font-size:12px;color:#666;">😢 '+pet.name+'心情很差...<button class="btn btn-sm btn-primary" style="margin-left:8px;padding:4px 12px;" onclick="playerComfortPet(\''+pet.id+'\')">陪陪它</button></div>';
+    h+='<div style="text-align:center;margin-top:8px;padding:8px;background:#fce4ec;border-radius:10px;font-size:12px;color:#666;">😢 '+pet.name+'心情很差...<button class="btn btn-sm btn-primary" style="margin-left:8px;padding:4px 12px;" onclick="playerComfortPet(\\'\'+pet.id+\'\\')">陪陪它</button></div>';
   }
   h+='</div>';
   if(G.pets.length>1){
     h+='<div style="text-align:center;padding:8px 0 12px;"><small style="color:#999;">切换宠物：</small>';
     G.pets.forEach(function(p,i){
-      h+='<span style="padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;background:'+(p.id===pet.id?'#ff9800':'#f5f5f5')+';color:'+(p.id===pet.id?'#fff':'#666')+';margin:0 4px;" onclick="renderPetDetail(G.pets['+i+'])">'+p.emoji+' '+p.name+'</span>';
+      h+='<span style="padding:4px 12px;border-radius:12px;font-size:11px;cursor:pointer;background:'+(p.id===pet.id?'#ff9800':'#f5f5f5')+';color:'+(p.id===pet.id?'#fff':'#666')+';margin:0 4px;" onclick="renderPetDetail(G.pets[\'+i+\'])">'+p.emoji+' '+p.name+'</span>';
     });
     h+='</div>';
   }
@@ -10273,7 +10282,7 @@ function petPlayTreasure(id){
     var eqGain=Math.floor(Math.random()*3)+2;
     G.EQ=clamp(G.EQ+eqGain,0,200);result.icon='🤝';result.text='宠物带回了好朋友的祝福！EQ+'+eqGain;
   }
-  _petShowModal('🗺️ 寻宝之旅','<div class="pet-treasure-result"><span class="pet-treasure-emoji">'+result.icon+'</span>'+pet.emoji+' '+pet.name+' 去寻宝了！<br><br>'+result.text+'</div>','<button class="btn btn-primary" onclick="this.closest(\'.modal-overlay\').classList.remove(\'show\');setTimeout(function(){var o=this.parentElement.parentElement.parentElement;if(o)o.remove();}.bind(this),300)">太棒了！</button>');
+  _petShowModal('🗺️ 寻宝之旅','<div class="pet-treasure-result"><span class="pet-treasure-emoji">'+result.icon+'</span>'+pet.emoji+' '+pet.name+' 去寻宝了！<br><br>'+result.text+'</div>','<button class="btn btn-primary" onclick="this.closest(\\'.modal-overlay\\').classList.remove(\\'show\\');setTimeout(function(){var o=this.parentElement.parentElement.parentElement;if(o)o.remove();}.bind(this),300)">太棒了！</button>');
   saveGame();renderPetDetail(pet);updatePetBadge();
 }
 function petTrainTrick(id,trickIdx){
@@ -11283,9 +11292,9 @@ function showContactDetail(friendId){
   html += '</div>';
   
   html += '<div class="fd-actions">';
-  html += '<button class="btn btn-primary" onclick="startChatWithFriend(\'' + friend.id + '\')">💬 聊天</button>';
+  html += '<button class="btn btn-primary" onclick="startChatWithFriend(\\'\' + friend.id + \'\\')">💬 聊天</button>';
   if(canHire2){
-    html += '<button class="btn btn-success" onclick="tryHireFriend(\'' + friend.id + '\')">🏢 邀请入职</button>';
+    html += '<button class="btn btn-success" onclick="tryHireFriend(\\'\' + friend.id + \'\\')">🏢 邀请入职</button>';
   }
   html += '<button class="btn btn-outline" onclick="closeFriendDetail()">关闭</button>';
   html += '</div>';
@@ -11703,8 +11712,8 @@ function openBusinessDetail(id){
   const addCount=owned.additionalInvestment||0;
   const canAdd=addCount<3;
   content+='<div style="margin-top:16px;display:flex;gap:8px;">';
-  content+='<button class="btn btn-danger" style="flex:1;" onclick="sellBusiness(\''+b.id+'\');closeModal();">转让 ('+fmt(sellPrice)+')</button>';
-  if(canAdd)content+='<button class="btn btn-warning" style="flex:1;background:#f39c12;color:#fff;" onclick="addBusinessInvestment(\''+b.id+'\');closeModal();">追加投入 ('+fmt(addInvestCost)+') '+(addCount)+'/3</button>';
+  content+='<button class="btn btn-danger" style="flex:1;" onclick="sellBusiness(\\'\'+b.id+\'\\');closeModal();">转让 ('+fmt(sellPrice)+')</button>';
+  if(canAdd)content+='<button class="btn btn-warning" style="flex:1;background:#f39c12;color:#fff;" onclick="addBusinessInvestment(\\'\'+b.id+\'\\');closeModal();">追加投入 ('+fmt(addInvestCost)+') '+(addCount)+'/3</button>';
   content+='<button class="btn" style="flex:1;background:#f0f0f0;" onclick="closeModal()">关闭</button>';
   content+='</div>';
   showModal({title:b.icon+' '+b.name+' · 经营详情',content:content});
@@ -11730,7 +11739,7 @@ function showAIChat(){
     <div style="width:90%;max-width:500px;height:70%;background:#fff;border-radius:12px;display:flex;flex-direction:column;overflow:hidden;">
       <div style="padding:12px 16px;background:#4472C4;color:#fff;display:flex;justify-content:space-between;align-items:center;">
         <span>🤖 AI 职业顾问</span>
-        <button onclick="document.getElementById('aiChatModal').remove()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">&times;</button>
+        <button onclick="document.getElementById(\'aiChatModal\').remove()" style="background:none;border:none;color:#fff;font-size:20px;cursor:pointer;">&times;</button>
       </div>
       <div id="aiChatMsgs" style="flex:1;overflow-y:auto;padding:12px;font-size:14px;">
         <div style="background:#f0f0f0;padding:8px 12px;border-radius:8px;margin-bottom:8px;">你好！我是AI职业顾问，有什么关于职业发展、投资理财的问题可以问我。</div>
@@ -12848,7 +12857,7 @@ function showScheduleConfirm(npcId,scheduleInfo){
   const body=document.getElementById('chatBody');
   // Add system message with unique ID to prevent double-click
   const cardId='sched_card_'+Date.now();
-  const sysHtml='<div class="chat-bub sys" id="'+cardId+'" style="max-width:90%;text-align:center;"><div style="font-size:13px;font-weight:600;margin-bottom:6px;">📅 '+name+'约你'+actName+'</div><div style="font-size:12px;color:#666;">'+costStr+leaveStr+'</div><div id="'+cardId+'_btns" style="margin-top:8px;display:flex;gap:8px;justify-content:center;"><span onclick="_confirmSched(\''+cardId+'\',\''+npcId+'\','+scheduleInfo.type.length+','+JSON.stringify(scheduleInfo).replace(/"/g,'&quot;')+',true)" style="background:#27ae60;color:#fff;padding:4px 12px;border-radius:12px;font-size:12px;cursor:pointer;">接受</span><span onclick="_confirmSched(\''+cardId+'\',\''+npcId+'\','+scheduleInfo.type.length+','+JSON.stringify(scheduleInfo).replace(/"/g,'&quot;')+',false)" style="background:#e74c3c;color:#fff;padding:4px 12px;border-radius:12px;font-size:12px;cursor:pointer;">婉拒</span></div></div>';
+  const sysHtml='<div class="chat-bub sys" id="'+cardId+'" style="max-width:90%;text-align:center;"><div style="font-size:13px;font-weight:600;margin-bottom:6px;">📅 '+name+'约你'+actName+'</div><div style="font-size:12px;color:#666;">'+costStr+leaveStr+'</div><div id="'+cardId+'_btns" style="margin-top:8px;display:flex;gap:8px;justify-content:center;"><span onclick="_confirmSched(\\'\'+cardId+\'\\',\\'\'+npcId+\'\\',\'+scheduleInfo.type.length+\',\'+JSON.stringify(scheduleInfo).replace(/"/g,'&quot;')+',true)" style="background:#27ae60;color:#fff;padding:4px 12px;border-radius:12px;font-size:12px;cursor:pointer;">接受</span><span onclick="_confirmSched(\\'\'+cardId+\'\\',\\'\'+npcId+\'\\',\'+scheduleInfo.type.length+\',\'+JSON.stringify(scheduleInfo).replace(/"/g,'&quot;')+',false)" style="background:#e74c3c;color:#fff;padding:4px 12px;border-radius:12px;font-size:12px;cursor:pointer;">婉拒</span></div></div>';
   body.insertAdjacentHTML('beforeend',sysHtml);
   body.scrollTop=body.scrollHeight;
 }
@@ -13223,7 +13232,7 @@ function _v4_boostInitialState(){
 }
 
 // === showPlaybook ===
-function showPlaybook(pageIdx){if(!pageIdx) pageIdx=0;const p=PLAYBOOK_PAGES[pageIdx];const navHTML=PLAYBOOK_PAGES.map(function(pp,i){return '<button class="btn btn-sm '+(i===pageIdx?'btn-primary':'btn-outline')+'" onclick="showPlaybook('+i+')">'+pp.title.split(' ')[0]+'</button>';}).join('');const html='<div class="playbook-nav">'+navHTML+'</div><h3 style="margin:12px 0 8px;">'+p.title+'</h3><div class="playbook-content">'+p.content+'</div>';showModal({title:'玩法手册',content:html,showCancel:false,confirmText:'知道了'});}
+function showPlaybook(pageIdx){if(!pageIdx) pageIdx=0;const p=PLAYBOOK_PAGES[pageIdx];const navHTML=PLAYBOOK_PAGES.map(function(pp,i){return '<button class="btn btn-sm '+(i===pageIdx?'btn-primary':'btn-outline')+'" onclick="showPlaybook(\'+i+\')">'+pp.title.split(' ')[0]+'</button>';}).join('');const html='<div class="playbook-nav">'+navHTML+'</div><h3 style="margin:12px 0 8px;">'+p.title+'</h3><div class="playbook-content">'+p.content+'</div>';showModal({title:'玩法手册',content:html,showCancel:false,confirmText:'知道了'});}
 
 // === showSettlementAnimation ===
 function showSettlementAnimation(before,after){
@@ -13282,8 +13291,8 @@ function showCelebration(type,title,desc){
     '<div class="celeb-icon">'+ (type==='promotion'?'🎉':type==='invest'?'💰':type==='wedding'?'💒':'🏆') +'</div>'+
     '<div class="celeb-title">'+title+'</div>'+
     '<div class="celeb-desc">'+desc+'</div>'+
-    '<button class="btn btn-warning btn-sm" onclick="_shareCelebration(\''+type+'\')">分享喜悦</button>'+
-    '<button class="btn btn-primary btn-sm" onclick="document.getElementById(\'celebOverlay\').remove();" style="margin-top:8px;">继续人生</button>'+
+    '<button class="btn btn-warning btn-sm" onclick="_shareCelebration(\\'\'+type+\'\\')">分享喜悦</button>'+
+    '<button class="btn btn-primary btn-sm" onclick="document.getElementById(\\'celebOverlay\\').remove();" style="margin-top:8px;">继续人生</button>'+
     '</div>';
   document.body.appendChild(overlay);
   // Confetti
@@ -13632,7 +13641,7 @@ function toggleDatePanel(){
     const costStr=act.cost>0?'¥'+fmt(act.cost):'免费';
     const leaveStr=act.annualLeave>0?'+'+act.annualLeave+'天假':'';
     const reqStr=locked?'需亲密'+act.minIntimacy+'/信任'+act.minTrust:'';
-    html+='<div class="chat-date-item'+(locked?' locked':'')+'" onclick="'+(locked?'':'startPlayerDate(\''+act.id+'\')')+'">';
+    html+='<div class="chat-date-item'+(locked?' locked':'')+'" onclick="\'+(locked?\'\':\'startPlayerDate(\\'\'+act.id+\'\\')\')+\'">';
     html+='<span>'+_ic(act.icon)+'</span><span>'+act.name+'</span>';
     if(locked)html+='<span class="cost" style="color:#e74c3c;">🔒'+reqStr+'</span>';
     else html+='<span class="cost">'+costStr+(leaveStr?' +'+leaveStr:'')+'</span>';
@@ -13885,6 +13894,6 @@ function randPick(arr){return arr[Math.floor(Math.random()*arr.length)];}
 
 <div id="v4QuickMenu" class="v4-quick-menu" style="display:none;">
   <div class="v4-menu-item" onclick="openSettings()">设置</div>
-  <div class="v4-menu-item" onclick="showPlaybook();document.getElementById('v4QuickMenu').style.display='none';">📖玩法手册</div>
+  <div class="v4-menu-item" onclick="showPlaybook();document.getElementById(\'v4QuickMenu\').style.display=\'none\';">📖玩法手册</div>
 </body>
 </html>
