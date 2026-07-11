@@ -1228,26 +1228,7 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
 
 
 <div class="help-fab" id="helpFab" onclick="openGuide()">❓</div>
-
-<div id="settingsOverlay" class="modal-overlay">
-  <div class="modal-box">
-    <div class="modal-title">⚙️ 游戏设置</div>
-    <div class="modal-content">
-      <div style="margin-bottom:12px;">
-        <div style="font-size:13px;color:#666;margin-bottom:6px;">🤖 AI聊天 API Key</div>
-        <input type="text" id="apiKeyInput" placeholder="输入API Key (tp-...)" style="width:100%;padding:10px;border:1.5px solid #ddd;border-radius:8px;font-size:13px;box-sizing:border-box;">
-        <div style="font-size:11px;color:#999;margin-top:4px;">提供API Key后享受AI个性化对话。没有Key也能玩但对话较少。</div>
-      </div>
-    </div>
-    <div class="modal-btns">
-      <button class="btn btn-outline" onclick="closeSettings()" style="flex:1;">取消</button>
-      <button class="btn btn-primary" onclick="saveSettings()" style="flex:1;">保存</button>
-    </div>
-  </div>
-</div>
-
 <div id="v4QuickMenu" class="v4-quick-menu" style="display:none;">
-  <div class="v4-menu-item" onclick="openSettings()">设置</div>
   <div class="v4-menu-item" onclick="showPlaybook();document.getElementById('v4QuickMenu').style.display='none';">📖玩法手册</div>
 
 <script>
@@ -6697,7 +6678,7 @@ function showChatProfile(){
     document.getElementById('chatOverlay').appendChild(overlay);
   }
   overlay.querySelector('.chat-profile-body').innerHTML = html;
-  setTimeout(()=> overlay.classList.add('show'), 50);
+  requestAnimationFrame(()=> overlay.classList.add('show'));
 }
 function closeChatProfile(){
   const overlay = document.getElementById('chatProfilePopup');
@@ -10398,7 +10379,7 @@ async function _doAdvanceMonth(){
       try{refreshAll();}catch(e){}
     }
   },25000);
-  setTimeout(async function(){
+  requestAnimationFrame(async function(){
     try{
       await advanceMonth();
     }catch(e){
