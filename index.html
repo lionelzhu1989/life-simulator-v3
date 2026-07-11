@@ -1104,7 +1104,7 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
     <div id="phone-messages" class="phone-content active"></div>
     <div id="phone-contacts" class="phone-content"></div>
     <div id="phone-moments" class="phone-content"></div>
-    <div id="phone-dashboard" class="phone-content"></div>
+    <div id="phone-dashboard" style="display:none;" class="phone-content"></div>
     <div id="phone-notifications" class="phone-content"></div>
   </div>
 
@@ -6705,7 +6705,7 @@ function closeChatProfile(){
 }
 const AI_CHAT_CONFIG={
   apiUrl:'https://token-plan-cn.xiaomimimo.com/v1/chat/completions',
-  apiKey:'YOUR_TOKEN_HERE',
+  apiKey: window.APP_API_KEY,
   model:'xiaomi/mimo-v2.5',
   enabled:true,
   _fallbackCount:0,
@@ -7647,7 +7647,7 @@ function switchPhoneTab(tab){
   else if(tab==='notifications')renderNotifications();
 }
 function renderDashboard(){
-  const el=document.getElementById('phone-dashboard');if(!el)return;
+  const el=document.getElementById('phone-dashboard" style="display:none;');if(!el)return;
   const cash=G.cash||0;
   let investValue=0;
   if(G.houses)G.houses.forEach(h=>{investValue+=(h.marketValue||0);});
@@ -7838,7 +7838,7 @@ const AI_ENGINE={
   enabled:true,
   proxyUrl:'https://token-plan-cn.xiaomimimo.com/v1/chat/completions',
   directUrl:'https://token-plan-cn.xiaomimimo.com/v1/chat/completions',
-  apiKey:'YOUR_TOKEN_HERE',
+  apiKey: window.APP_API_KEY,
   model:'xiaomi/mimo-v2.5',
   useProxy:false,
   cache:{},
