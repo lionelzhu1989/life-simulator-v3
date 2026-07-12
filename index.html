@@ -10,7 +10,7 @@
 :root{--primary:#3498db;--primary-dark:#2980b9;--header-bg:#2c3e50;--bg:#f0f2f5;--card-bg:#fff;--text:#333;--text-light:#888;--danger:#e74c3c;--success:#27ae60;--warning:#f39c12;--gold:#f1c40f;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.08);}
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
 .app{height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;background:var(--bg);}
-.page{flex:1;overflow-y:auto;padding:4px;padding-bottom:30px;-webkit-overflow-scrolling:touch;display:none;}
+.page{flex:1;overflow-y:auto;padding:4px;padding-bottom:10px;-webkit-overflow-scrolling:touch;display:none;}
 .page.active{display:block;}
 .header{background:var(--header-bg);color:#fff;padding:12px 16px 10px;text-align:center;position:relative;flex-shrink:0;}
 .header h1{font-size:16px;font-weight:600;letter-spacing:1px;}
@@ -2214,7 +2214,8 @@ function getMonth(){return(G.totalMonths%12)+1;}
 function getGameYear(){return Math.floor(G.totalMonths/12)+1;}
 
 // ========== UI函数 ==========
-function showModal({title,content,showCancel,confirmText,cancelText,success}){
+function _closeAllModals(){document.querySelectorAll('.modal-overlay.show').forEach(e=>{e.classList.remove('show');});}
+function showModal({title,content,showCancel,confirmText,cancelText,success}){_closeAllModals();
   document.getElementById('modalTitle').textContent=title||'';
   document.getElementById('modalContent').innerHTML=(content||'').replace(/\n/g,'<br>');
   const btns=document.getElementById('modalBtns');
@@ -2235,7 +2236,7 @@ function showModal({title,content,showCancel,confirmText,cancelText,success}){
   cf.setAttribute('data-modal-action','confirm');
   btns.appendChild(cf);
   const overlay=document.getElementById('modalOverlay');
-  overlay.classList.add('show');
+  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
   overlay.style.pointerEvents='auto';
   overlay.style.visibility='visible';
   overlay.style.opacity='';
@@ -2809,7 +2810,7 @@ function showForbesCelebration(total){
     if(total>fakeAsset)rank=Math.min(rank,i+1);
   });
   document.getElementById('forbesSub').textContent='恭喜！你以 '+fmt(total)+' 的总资产登上福布斯富豪榜 第'+rank+'位！';
-  overlay.classList.add('show');
+  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
   // Create confetti
   const colors=['#f1c40f','#e74c3c','#3498db','#27ae60','#9b59b6','#e67e22'];
   for(let i=0;i<50;i++){
@@ -3534,7 +3535,7 @@ function showWorkScenarioModal(data,career){
   box.innerHTML+='<button class="ws-close-btn" onclick="hideWorkScenario()">关闭</button>';
   // 存储当前情景数据
   G._currentWorkScenario=data;
-  overlay.classList.add('show');
+  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
 }
 function handleWorkScenarioChoice(idx){
   var data=G._currentWorkScenario;if(!data)return;
@@ -6177,7 +6178,7 @@ function showGroupSelector(npcId){
   });
   html+='</div>';
   overlay.innerHTML=html;
-  overlay.classList.add('show');
+  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
 }
 function hideGroupSelect(){
   const overlay=document.getElementById('groupSelectOverlay');
@@ -6200,7 +6201,7 @@ function showManageGroups(){
     document.body.appendChild(overlay);
   }
   renderManageGroupsModal(overlay);
-  overlay.classList.add('show');
+  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
 }
 function hideManageGroups(){
   const overlay=document.getElementById('manageGroupsOverlay');
@@ -7883,7 +7884,7 @@ function showGiveConfirm(npcId,amount,msg,callback){
   }
   document.getElementById('giveConfirmNpc').textContent='给 '+npcName+' 转账';
   document.getElementById('giveConfirmAmount').textContent=fmt(amount);
-  overlay.classList.add('show');
+  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
   // Store pending give data
   window._pendingGive={npcId:npcId,amount:amount,msg:msg,callback:callback};
 }
@@ -7939,7 +7940,7 @@ function showMoneyDecision(npcId,amount,reason){
   document.getElementById('mdTitle').textContent=npcName+'向你借钱';
   document.getElementById('mdAmount').textContent=fmt(amount);
   document.getElementById('mdReason').textContent='原因：'+reason;
-  overlay.classList.add('show');
+  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
   window._pendingAsk={npcId:npcId,amount:amount,reason:reason};
 }
 
@@ -10115,7 +10116,7 @@ function _petShowModal(title,html,buttons){
   overlay.className='modal-overlay';
   overlay.innerHTML='<div class="modal-box" style="text-align:center;"><div class="modal-title">'+title+'</div><div class="modal-content">'+html+'</div><div class="modal-btns">'+buttons+'</div></div>';
   document.body.appendChild(overlay);
-  setTimeout(function(){overlay.classList.add('show');},10);
+  setTimeout(function(){document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');},10);
   return overlay;
 }
 function _petCloseModal(overlay){
@@ -13227,7 +13228,7 @@ function showSettlementAnimation(before,after){
     '<div class="settlement-row"><span class="settlement-label">心情</span><span class="settlement-val">'+Math.round(after.mood)+'</span></div>'+
     '<div class="settlement-bar"></div></div>';
   document.body.appendChild(overlay);
-  setTimeout(function(){overlay.classList.add('show');},50);
+  setTimeout(function(){document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');},50);
   setTimeout(function(){overlay.classList.remove('show');setTimeout(function(){overlay.remove();},300);},1800);
 }
 
@@ -13281,7 +13282,7 @@ function showCelebration(type,title,desc){
     c.style.background=colors[Math.floor(Math.random()*6)];
     overlay.appendChild(c);
   }
-  setTimeout(function(){overlay.classList.add('show');},50);
+  setTimeout(function(){document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');},50);
 }
 
 // === _shareCelebration ===
