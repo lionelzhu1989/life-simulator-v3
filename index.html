@@ -10,11 +10,11 @@
 :root{--primary:#3498db;--primary-dark:#2980b9;--header-bg:#2c3e50;--bg:#f0f2f5;--card-bg:#fff;--text:#333;--text-light:#888;--danger:#e74c3c;--success:#27ae60;--warning:#f39c12;--gold:#f1c40f;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.08);}
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
 .app{height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;background:var(--bg);}
-.page{flex:1;overflow-y:auto;padding:4px;padding-bottom:10px;-webkit-overflow-scrolling:touch;display:none;}
+.page{flex:1;overflow-y:auto;padding:16px;padding-bottom:80px;-webkit-overflow-scrolling:touch;display:none;}
 .page.active{display:block;}
-.header{background:var(--header-bg);color:#fff;padding:12px 16px 10px;text-align:center;position:relative;flex-shrink:0;}
-.header h1{font-size:16px;font-weight:600;letter-spacing:1px;}
-.header-sub{font-size:12px;opacity:.92;margin-top:2px;line-height:1.3;}
+.header{background:var(--header-bg);color:#fff;padding:16px 20px 14px;text-align:center;position:relative;flex-shrink:0;}
+.header h1{font-size:18px;font-weight:600;letter-spacing:1px;}
+.header-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;}
 .tab-bar{display:flex;background:#fff;border-top:1px solid #e8e8e8;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0);position:relative;z-index:100;}
 .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0 6px;font-size:10px;color:var(--text-light);cursor:pointer;transition:color .2s;user-select:none;-webkit-user-select:none;}
 .tab-item.active{color:var(--primary);}
@@ -48,7 +48,7 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 .btn-outline{background:transparent;border:1.5px solid var(--primary);color:var(--primary);}
 .btn-block{display:flex;width:100%;}
 .btn-sm{padding:8px 16px;font-size:12px;min-height:38px;}
-.btn-lg{padding:14px 32px;font-size:16px;}
+.btn-lg{padding:10px 24px;font-size:14px;}
 .btn:disabled{opacity:.45;cursor:not-allowed;transform:none;}
 .list-item{display:grid;grid-template-columns:1fr auto;align-items:center;gap:8px;padding:14px 12px;min-height:48px;border-bottom:1px solid #f0f0f0;}
 .list-item:last-child{border-bottom:none;}
@@ -972,7 +972,7 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
       <div class="card-title"><span class="icon">💬</span>最近消息</div>
       <div id="recentMsgList"></div>
     </div>
-    <div class="card text-center" style="position:sticky;bottom:0;z-index:10;background:rgba(240,242,0.95);backdrop-filter:blur(8px);margin:0 -4px;border-radius:16px 16px 0 0;box-shadow:0 -4px 12px rgba(0,0,0,0.08);">
+    <div class="card text-center">
       <button class="btn btn-primary btn-lg btn-block" onclick="debouncedNextMonth()" id="nextMonthBtn" style="min-height:52px;padding:16px 32px;font-size:16px;">🚀 度过一月</button>
       <div style="display:flex;gap:8px;margin-top:10px;justify-content:center;">
         <button class="btn btn-outline btn-sm" onclick="fastForward(5)">⏩ 快进5年</button>
@@ -1070,7 +1070,7 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
       <div class="card-title"><span class="icon">📤</span>分享</div>
       <button class="btn btn-success btn-block" onclick="generateSharePoster()">📱 生成成就海报</button>
     </div>
-    <div class="card text-center" style="position:sticky;bottom:0;z-index:10;background:rgba(240,242,0.95);backdrop-filter:blur(8px);margin:0 -4px;border-radius:16px 16px 0 0;box-shadow:0 -4px 12px rgba(0,0,0,0.08);">
+    <div class="card text-center">
       <button class="btn btn-danger btn-block" onclick="confirmRestart()">🔄 重开人生</button>
     </div>
   </div>
@@ -2214,8 +2214,7 @@ function getMonth(){return(G.totalMonths%12)+1;}
 function getGameYear(){return Math.floor(G.totalMonths/12)+1;}
 
 // ========== UI函数 ==========
-function _closeAllModals(){document.querySelectorAll('.modal-overlay.show').forEach(e=>{e.classList.remove('show');});}
-function showModal({title,content,showCancel,confirmText,cancelText,success}){_closeAllModals();
+function showModal({title,content,showCancel,confirmText,cancelText,success}){
   document.getElementById('modalTitle').textContent=title||'';
   document.getElementById('modalContent').innerHTML=(content||'').replace(/\n/g,'<br>');
   const btns=document.getElementById('modalBtns');
@@ -2236,7 +2235,7 @@ function showModal({title,content,showCancel,confirmText,cancelText,success}){_c
   cf.setAttribute('data-modal-action','confirm');
   btns.appendChild(cf);
   const overlay=document.getElementById('modalOverlay');
-  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
+  overlay.classList.add('show');
   overlay.style.pointerEvents='auto';
   overlay.style.visibility='visible';
   overlay.style.opacity='';
@@ -2810,7 +2809,7 @@ function showForbesCelebration(total){
     if(total>fakeAsset)rank=Math.min(rank,i+1);
   });
   document.getElementById('forbesSub').textContent='恭喜！你以 '+fmt(total)+' 的总资产登上福布斯富豪榜 第'+rank+'位！';
-  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
+  overlay.classList.add('show');
   // Create confetti
   const colors=['#f1c40f','#e74c3c','#3498db','#27ae60','#9b59b6','#e67e22'];
   for(let i=0;i<50;i++){
@@ -3535,7 +3534,7 @@ function showWorkScenarioModal(data,career){
   box.innerHTML+='<button class="ws-close-btn" onclick="hideWorkScenario()">关闭</button>';
   // 存储当前情景数据
   G._currentWorkScenario=data;
-  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
+  overlay.classList.add('show');
 }
 function handleWorkScenarioChoice(idx){
   var data=G._currentWorkScenario;if(!data)return;
@@ -6178,7 +6177,7 @@ function showGroupSelector(npcId){
   });
   html+='</div>';
   overlay.innerHTML=html;
-  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
+  overlay.classList.add('show');
 }
 function hideGroupSelect(){
   const overlay=document.getElementById('groupSelectOverlay');
@@ -6201,7 +6200,7 @@ function showManageGroups(){
     document.body.appendChild(overlay);
   }
   renderManageGroupsModal(overlay);
-  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
+  overlay.classList.add('show');
 }
 function hideManageGroups(){
   const overlay=document.getElementById('manageGroupsOverlay');
@@ -7884,7 +7883,7 @@ function showGiveConfirm(npcId,amount,msg,callback){
   }
   document.getElementById('giveConfirmNpc').textContent='给 '+npcName+' 转账';
   document.getElementById('giveConfirmAmount').textContent=fmt(amount);
-  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
+  overlay.classList.add('show');
   // Store pending give data
   window._pendingGive={npcId:npcId,amount:amount,msg:msg,callback:callback};
 }
@@ -7940,7 +7939,7 @@ function showMoneyDecision(npcId,amount,reason){
   document.getElementById('mdTitle').textContent=npcName+'向你借钱';
   document.getElementById('mdAmount').textContent=fmt(amount);
   document.getElementById('mdReason').textContent='原因：'+reason;
-  document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');
+  overlay.classList.add('show');
   window._pendingAsk={npcId:npcId,amount:amount,reason:reason};
 }
 
@@ -8939,6 +8938,7 @@ function buildNewsPrompt(ctx){
 
 async function callAI(promptBuilder,eventType){
   if(!window._aiQueue)window._aiQueue=Promise.resolve();
+promptBuilder,eventType){
   if(!AI_ENGINE.enabled||AI_ENGINE._fallbackCount>=AI_ENGINE.maxFallback)return Promise.resolve(null);
   // 入队：等待前一个调用完成后，间隔1秒再执行
   const task=window._aiQueue.then(async()=>{
@@ -10116,7 +10116,7 @@ function _petShowModal(title,html,buttons){
   overlay.className='modal-overlay';
   overlay.innerHTML='<div class="modal-box" style="text-align:center;"><div class="modal-title">'+title+'</div><div class="modal-content">'+html+'</div><div class="modal-btns">'+buttons+'</div></div>';
   document.body.appendChild(overlay);
-  setTimeout(function(){document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');},10);
+  setTimeout(function(){overlay.classList.add('show');},10);
   return overlay;
 }
 function _petCloseModal(overlay){
@@ -13228,7 +13228,7 @@ function showSettlementAnimation(before,after){
     '<div class="settlement-row"><span class="settlement-label">心情</span><span class="settlement-val">'+Math.round(after.mood)+'</span></div>'+
     '<div class="settlement-bar"></div></div>';
   document.body.appendChild(overlay);
-  setTimeout(function(){document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');},50);
+  setTimeout(function(){overlay.classList.add('show');},50);
   setTimeout(function(){overlay.classList.remove('show');setTimeout(function(){overlay.remove();},300);},1800);
 }
 
@@ -13282,7 +13282,7 @@ function showCelebration(type,title,desc){
     c.style.background=colors[Math.floor(Math.random()*6)];
     overlay.appendChild(c);
   }
-  setTimeout(function(){document.querySelectorAll('.modal-overlay.show').forEach(e=>e.classList.remove('show'));overlay.classList.add('show');},50);
+  setTimeout(function(){overlay.classList.add('show');},50);
 }
 
 // === _shareCelebration ===
