@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<script>(function(){var h=location.hash.substring(1),m=h.match(/key=([^&]+)/);if(m){localStorage.setItem("mimo_api_key",decodeURIComponent(m[1]));history.replaceState(null,"",location.pathname);}})();</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>offer含金量 v3.3</title>
@@ -9,22 +8,22 @@
 
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 :root{--primary:#3498db;--primary-dark:#2980b9;--header-bg:#2c3e50;--bg:#f0f2f5;--card-bg:#fff;--text:#333;--text-light:#888;--danger:#e74c3c;--success:#27ae60;--warning:#f39c12;--gold:#f1c40f;--radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.08);}
-html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);}
-.app{height:100vh;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;background:var(--bg);overflow:hidden;}
-.page{flex:1;overflow-y:auto;padding:8px;padding-bottom:80px;-webkit-overflow-scrolling:touch;display:none;min-height:0;}
-.page.active{display:block;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.header{background:var(--header-bg);color:#fff;padding:16px 20px 14px;text-align:center;position:relative;flex-shrink:0;}
-.header h1{font-size:18px;font-weight:600;letter-spacing:1px;}
-.header-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;}
+html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
+.app{height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;background:var(--bg);}
+.page{flex:1;overflow-y:auto;padding:4px;padding-bottom:30px;-webkit-overflow-scrolling:touch;display:none;}
+.page.active{display:block;}
+.header{background:var(--header-bg);color:#fff;padding:12px 16px 10px;text-align:center;position:relative;flex-shrink:0;}
+.header h1{font-size:16px;font-weight:600;letter-spacing:1px;}
+.header-sub{font-size:12px;opacity:.92;margin-top:2px;line-height:1.3;}
 .tab-bar{display:flex;background:#fff;border-top:1px solid #e8e8e8;flex-shrink:0;padding-bottom:env(safe-area-inset-bottom,0);position:relative;z-index:100;}
 .tab-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0 6px;font-size:10px;color:var(--text-light);cursor:pointer;transition:color .2s;user-select:none;-webkit-user-select:none;}
 .tab-item.active{color:var(--primary);}
 .tab-item .tab-icon{font-size:22px;margin-bottom:2px;}
 .tab-item:active{opacity:.7;}
-.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px;margin-bottom:6px;}
-.card-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.card{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;margin-bottom:12px;}
+.card-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
 .card-title .icon{font-size:18px;}
-.attr-row{display:flex;justify-content:space-between;align-items:center;padding:4px 0;border-bottom:1px solid #f5f5f5;}
+.attr-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f5f5f5;}
 .attr-row:last-child{border-bottom:none;}
 .attr-label{font-size:13px;color:#666;display:flex;align-items:center;gap:4px;}
 .attr-value{font-size:14px;font-weight:600;color:var(--text);}
@@ -66,7 +65,7 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',
 .input{flex:1;height:36px;border:1.5px solid #ddd;border-radius:8px;padding:0 12px;font-size:14px;outline:none;transition:border .2s;}
 .input:focus{border-color:var(--primary);}
 .modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);z-index:1000;display:none;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .25s;}
-.modal-overlay.show{opacity:1;pointer-events:auto;display:flex;}
+.modal-overlay.show{opacity:1;pointer-events:auto;}
 .modal-box{background:#fff;border-radius:16px;width:85%;max-width:360px;max-height:85vh;padding:24px 20px;text-align:center;transform:scale(0.85);transition:transform .25s;pointer-events:auto;overflow:hidden;display:flex;flex-direction:column;}
 .modal-overlay.show .modal-box{transform:scale(1);}
 .modal-title{font-size:17px;font-weight:600;margin-bottom:10px;flex-shrink:0;}
@@ -265,8 +264,8 @@ html,body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC',
 /* Trade input number spinner hide */
 #tradeInput::-webkit-inner-spin-button,#tradeInput::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 #tradeInput[type=number]{-moz-appearance:textfield;}
-.chat-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#ededed;z-index:1000;display:none;flex-direction:column;max-width:480px;margin:0 auto;}
-.chat-overlay.show{display:flex;z-index:1000;}
+.chat-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#ededed;z-index:99999;display:none;flex-direction:column;max-width:480px;margin:0 auto;}
+.chat-overlay.show{display:flex;}
 .chat-hd{background:var(--header-bg);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
 .chat-back{font-size:24px;cursor:pointer;padding:4px;line-height:1;}
 .chat-nm{font-size:17px;font-weight:600;}
@@ -974,11 +973,13 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
       <div id="recentMsgList"></div>
     </div>
     <div class="card text-center">
-      <button class="btn btn-primary btn-lg btn-block" onclick="debouncedNextMonth()" id="nextMonthBtn" style="min-height:48px;padding:14px 28px;font-size:16px;border-radius:12px;">🚀 度过一月</button>
-      <div style="display:flex;gap:6px;margin-top:6px;justify-content:center;">
-        <button class="btn btn-outline btn-sm" style="flex:1;padding:6px;font-size:11px;border-radius:6px;" onclick="fastForward(5)">⏩ 5年</button>
-        <button class="btn btn-outline btn-sm" style="flex:1;padding:6px;font-size:11px;border-radius:6px;" onclick="fastForward(10)">⏩ 10年</button>
-        <button class="btn btn-outline btn-sm" style="flex:1;padding:6px;font-size:11px;border-radius:6px;" onclick="socialGatheringMenu()">🤝 社交</button>
+      <button class="btn btn-primary btn-lg btn-block" onclick="debouncedNextMonth()" id="nextMonthBtn" style="min-height:52px;padding:16px 32px;font-size:16px;">🚀 度过一月</button>
+      <div style="display:flex;gap:8px;margin-top:10px;justify-content:center;">
+        <button class="btn btn-outline btn-sm" onclick="fastForward(5)">⏩ 快进5年</button>
+        <button class="btn btn-outline btn-sm" onclick="fastForward(10)">⏩ 快进10年</button>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:8px;justify-content:center;">
+        <button class="btn btn-outline btn-sm" style="font-size:11px;" onclick="socialGatheringMenu()">🤝 社交</button>
       </div>
       <div class="text-sm text-muted mt-8" id="yearHint">点击按钮推进人生</div>
     </div>
@@ -1193,7 +1194,7 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
 <div id="chatOverlay" class="chat-overlay">
   <div class="chat-hd"><span class="chat-back" onclick="closeChat()">←</span><span class="chat-nm" id="chatName"></span><span class="chat-profile-btn" onclick="showChatProfile()" style="margin-left:auto;font-size:12px;color:#3498db;cursor:pointer;padding:4px 8px;border:1px solid #3498db;border-radius:12px;">查看资料</span></div>
   <div class="chat-body" id="chatBody"></div>
-  <div class="chat-opts" id="chatOpts" style="display:none;z-index:1000;"></div>
+  <div class="chat-opts" id="chatOpts" style="display:none;z-index:99999;"></div>
   <div class="chat-input-area" id="chatInputArea">
     <button class="chat-input-back" onclick="closeChat()">📞</button>
     <input type="text" class="chat-input-field" id="chatInputField" placeholder="输入消息..." />
@@ -1209,7 +1210,7 @@ body{background:linear-gradient(180deg,#E8F4FF 0%,#F5F0FF 100%) fixed !important
 <div class="save-indicator" id="saveIndicator" style="position:fixed;top:10px;right:10px;background:rgba(39,174,96,0.9);color:#fff;padding:4px 12px;border-radius:12px;font-size:11px;z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;">已保存</div>
 
 <script>
-function _avt(a,c){return a||'👤'}
+function _avt(a,c){return a&&a.indexOf('img/')===0?'<img src="'+a+'" class="'+(c||'avatar-img')+'">':a||'👤'}
 function _ic(a){return a&&a.indexOf('img/')===0?'<img src="'+a+'" class="icon-img">':a||'📌'}
 // ========== 数据定义 ==========
 const JOBS=[
@@ -1836,7 +1837,7 @@ const LUXURY_ITEMS=[
 const FORBES_NAMES=['马化腾','马云','钟睒睒','张一鸣','黄峥','李嘉诚','刘强东','雷军','王健林','李彦宏'];
 
 // ===== NPC System =====
-const NPCS={mom:{name:'妈妈',avatar:'👩'},dad:{name:'爸爸',avatar:'👨'},boss:{name:'张总',avatar:'🧑‍💼'},colleague:{name:'小李',avatar:'👨‍💼'},hr:{name:'HR王姐',avatar:'👩‍💼'},bestie:{name:'老王',avatar:'👬'},classmate:{name:'小张',avatar:'🧑‍🎓'},mysterious:{name:'神秘人',avatar:'🥷'},banker:{name:'刘经理',avatar:'🏦'},realtor:{name:'小陈',avatar:'🏠'},spouse:{name:'小徐',avatar:'💑'},child:{name:'孩子',avatar:'🧒'},delivery:{name:'快递',avatar:'📦'},system:{name:'系统',avatar:'⚙️'},wife:{name:'小徐',avatar:'💑'},husband:{name:'小徐',avatar:'💑'},gymCoach:{name:'健身教练',avatar:'💪'},neighbor:{name:'邻居老赵',avatar:'👴'},exColleague:{name:'前同事小周',avatar:'🧑‍💼'},mentor:{name:'导师李教授',avatar:'🧑‍🏫'},scammer:{name:'神秘号码',avatar:'🎭'}};
+const NPCS={mom:{name:'妈妈',avatar:'img/avatars/mom.png'},dad:{name:'爸爸',avatar:'img/avatars/dad.png'},boss:{name:'张总',avatar:'img/avatars/boss.png'},colleague:{name:'小李',avatar:'img/avatars/colleague.png'},hr:{name:'HR王姐',avatar:'img/avatars/hr.png'},bestie:{name:'老王',avatar:'img/avatars/bestie.png'},classmate:{name:'小张',avatar:'img/avatars/classmate.png'},mysterious:{name:'神秘人',avatar:'img/avatars/mysterious.png'},banker:{name:'刘经理',avatar:'img/avatars/banker.png'},realtor:{name:'小陈',avatar:'img/avatars/realtor.png'},spouse:{name:'小徐',avatar:'img/avatars/spouse.png'},child:{name:'孩子',avatar:'img/avatars/child.png'},delivery:{name:'快递',avatar:'img/avatars/delivery.png'},system:{name:'系统',avatar:'img/avatars/system.png'},wife:{name:'小徐',avatar:'img/avatars/spouse.png'},husband:{name:'小徐',avatar:'img/avatars/spouse.png'},gymCoach:{name:'健身教练',avatar:'img/avatars/gymCoach.png'},neighbor:{name:'邻居老赵',avatar:'img/avatars/neighbor.png'},exColleague:{name:'前同事小周',avatar:'img/avatars/exColleague.png'},mentor:{name:'导师李教授',avatar:'img/avatars/mentor.png'},scammer:{name:'神秘号码',avatar:'🎭'}};
 const PHONE_MESSAGES=[
 // ====== FAMILY ======
 {id:'mom_nag',npc:'mom',type:'wechat',ageMin:23,ageMax:35,chance:0.12,cooldown:24,rounds:[
@@ -3439,7 +3440,7 @@ async function generateWorkScenario(){
   try{
     const resp=await fetch('https://token-plan-cn.xiaomimimo.com/v1/chat/completions',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer YOUR_TOKEN_HERE'},
       body:JSON.stringify({model:'xiaomi/mimo-v2.5',messages:[{role:'user',content:prompt}],temperature:0.9,max_tokens:500})
     });
     if(resp.ok){
@@ -5100,51 +5101,51 @@ const CHAT_TOPICS=[
 
 // ===== NPC人设系统 =====
 const NPC_PERSONALITIES={
-  mom:{name:'妈妈',avatar:'👩',traits:['唠叨','关心','爱攀比','节俭','护犊子'],
+  mom:{name:'妈妈',avatar:'img/avatars/mom.png',traits:['唠叨','关心','爱攀比','节俭','护犊子'],
     greetings:[{text:'妈，最近咋样？',tag:'日常'},{text:'妈，我工作上遇到点事',tag:'求助'},{text:'妈，我赚了点钱',tag:'分享'},{text:'妈，我想你了',tag:'温情'}],
     responses:{日常:['最近还行，就是想你了','你吃了吗？别老不吃早饭','你三叔家儿子又升职了'],求助:['怎么了？跟妈说说','工作上的事别太往心里去','实在不行就换一个'],分享:['赚了就好，但别太张扬','留着别乱花，以后用钱的地方多','你三叔家儿子也赚了不少呢'],温情:['妈也想你啊，有空回来看看','你过得好妈就放心了','别光想，回来吃顿饭']},
     followups:['对了，你二舅家闺女下个月结婚你去不去？','你张婶又给你介绍对象了...','隔壁王阿姨问我你有没有女朋友','你什么时候回来吃饭？','你小时候啊，天天骑我脖子上...']},
-  dad:{name:'爸爸',avatar:'👨',traits:['沉默','严厉','偶尔温情','报喜不报忧'],
+  dad:{name:'爸爸',avatar:'img/avatars/dad.png',traits:['沉默','严厉','偶尔温情','报喜不报忧'],
     greetings:[{text:'爸，身体咋样？',tag:'日常'},{text:'爸，想跟你聊聊',tag:'谈心'},{text:'爸，我升职了',tag:'分享'}],
     responses:{日常:['挺好的，别操心','老样子','工作忙就不用老打电话'],谈心:['怎么了？','说吧','工作不顺心？'],分享:['嗯，好好干','别骄傲','继续努力']},
     followups:['你妈天天念叨你，有空多回来','你小时候啊，天天骑我脖子上...','人这辈子起起落落正常，别太在意','钱不够花跟爸说，虽然不多','我当年也被裁员过，后来不也挺过来了']},
-  bestie:{name:'老王',avatar:'👬',traits:['八卦','直爽','爱喝酒','损友','讲义气'],
+  bestie:{name:'老王',avatar:'img/avatars/bestie.png',traits:['八卦','直爽','爱喝酒','损友','讲义气'],
     greetings:[{text:'老王，最近有啥八卦？',tag:'八卦'},{text:'老王，出来喝一杯？',tag:'喝酒'},{text:'老王，我跟你说个事',tag:'倾诉'}],
     responses:{八卦:['卧槽你终于问了！我憋好久了','来来来，坐好听我说','嘿嘿，这个你可得做好心理准备'],喝酒:['走起！老地方烧烤摊','必须的，我正愁没人陪','等我，我带两瓶好酒'],倾诉:['说！我听着呢','咋了兄弟，谁欺负你了','别憋着，说出来痛快']},
     followups:['咱高中班花李婷离婚了你知道吗？','还有个更炸裂的，咱班长现在做微商...','隔壁老刘被他老婆抓包了！','你们公司那个谁，好像跟前台有情况','我有个赚钱路子，币圈的，来不来？']},
-  colleague:{name:'小李',avatar:'👨‍💼',traits:['谨慎','消息灵通','爱吐槽','职场生存'],
+  colleague:{name:'小李',avatar:'img/avatars/colleague.png',traits:['谨慎','消息灵通','爱吐槽','职场生存'],
     greetings:[{text:'小李，公司最近啥情况？',tag:'打听'},{text:'小李，今天那个会你怎么看？',tag:'吐槽'},{text:'小李，我打算跳槽',tag:'秘密'}],
     responses:{打听:['别提了，又在裁员呢','暂时还行，但老板心情不太好','隔壁组走了好几个人了'],吐槽:['你也看到了吧？老板今天又发飙了','我觉得他是被大老板骂了拿我们撒气','唉，职场就这样'],秘密:['真的？你有目标了吗','别声张，我帮你留意','你走了我咋办']},
     followups:['下个月团建你去不去？','市场部Sarah跟研发部Mike...','听说年终奖要打折','老板最近在面试新人，你小心点','你知道谁要跳槽吗？']},
-  boss:{name:'张总',avatar:'🧑‍💼',traits:['圆滑','惜字如金','画饼','施压','偶尔真诚'],
+  boss:{name:'张总',avatar:'img/avatars/boss.png',traits:['圆滑','惜字如金','画饼','施压','偶尔真诚'],
     greetings:[{text:'张总，最近工作上想跟您聊聊',tag:'汇报'},{text:'张总，想谈谈我的发展',tag:'谈发展'},{text:'张总，有个想法想跟您说',tag:'提案'}],
     responses:{汇报:['嗯，说','你最近表现还行，继续保持','有什么问题直接说'],谈发展:['你有想法是好事','好好干，机会是给有准备的人的','年底评估的时候我帮你争取'],提案:['哦？说来听听','想法是好的，但要考虑实际','你先做个方案出来']},
     followups:['下个季度有个大项目，你有兴趣吗？','李副总那边有点小动作，你注意一下','你是我看好人，好好干','公司准备上市，你要是能扛住这一波...','说实话，我看好你']},
-  classmate:{name:'小张',avatar:'🧑‍🎓',traits:['攀比','怀旧','消息灵通','爱炫耀'],
+  classmate:{name:'小张',avatar:'img/avatars/classmate.png',traits:['攀比','怀旧','消息灵通','爱炫耀'],
     greetings:[{text:'小张，最近混得咋样？',tag:'叙旧'},{text:'小张，同学聚会搞起来？',tag:'聚会'},{text:'小张，你还记得XX吗？',tag:'回忆'}],
     responses:{叙旧:['还行吧，就是忙','比上不足比下有余','你呢？听说你混得不错'],聚会:['好啊！我来组织','必须的，好久没聚了','我看看时间，定好了通知你'],回忆:['记得啊！怎么突然提起他','你说那个谁啊，我现在还经常想起','哈哈，那时候的事...']},
     followups:['听说王磊现在做直播带货，月入百万','你还记得班花陈雪吗？她好像离婚了','咱班长现在做微商，天天刷屏','刘强现在送外卖，上次碰到的','有个同学找我借钱，你说借不借？']},
-  banker:{name:'刘经理',avatar:'🏦',traits:['专业','殷勤','推销','信息差'],
+  banker:{name:'刘经理',avatar:'img/avatars/banker.png',traits:['专业','殷勤','推销','信息差'],
     greetings:[{text:'刘经理，最近有什么好产品？',tag:'理财'},{text:'刘经理，我想了解一下贷款',tag:'贷款'},{text:'刘经理，最近市场怎么看？',tag:'市场'}],
     responses:{理财:['朱先生您好！正好有款产品适合您','最近我们行有款新产品，年化4.5%','保本保息的，很适合稳健型客户'],贷款:['您目前信用评级很好，利率可以给到最低','首套房3.85%，公积金还能再低','需要的话我帮您算个额度'],市场:['最近市场波动比较大，建议分散投资','我们几个大客户在抄底某个板块','具体我不能多说，您自己判断']},
     followups:['还有一款挂钩黄金的结构性存款，最高8%','如果您有闲置资金，可以考虑大额存单','最近黄金涨得厉害，要不要配置一点？','朱先生，私下跟您说，几个大客户最近在...','基金定投其实也不错，要不要了解一下？']},
-  realtor:{name:'小陈',avatar:'🏠',traits:['热情','夸大','逼单','信息量大'],
+  realtor:{name:'小陈',avatar:'img/avatars/realtor.png',traits:['热情','夸大','逼单','信息量大'],
     greetings:[{text:'小陈，最近房价咋样？',tag:'行情'},{text:'小陈，有啥好盘推荐？',tag:'看房'},{text:'小陈，我想投资房产',tag:'投资'}],
     responses:{行情:['朱哥！正好有事跟您说','最近市场回暖了，好多客户在看房','现在不买以后更贵'],看房:['朱哥！我手上正好有几套好房源','有套特别适合您，业主急售降价20万！','过了这村没这店了'],投资:['朱哥有眼光！新区那边有个商铺','回报率8%，月租金能到5000','好多客户都买了，稳赚不赔']},
     followups:['120平只要280万，去年同户型卖到320万','还有一套学区房，业主急售，价格好商量','要不要周末去看看？我安排专车接送','这套真的很抢手，今天已经三个人问了','首付可以分期，要不要了解一下？']},
-  neighbor:{name:'邻居老赵',avatar:'👴',traits:['热心','八卦','操心','小区万事通'],
+  neighbor:{name:'邻居老赵',avatar:'img/avatars/neighbor.png',traits:['热心','八卦','操心','小区万事通'],
     greetings:[{text:'赵叔，最近身体咋样？',tag:'日常'},{text:'赵叔，小区有啥新鲜事？',tag:'八卦'},{text:'赵叔，您看这个小区还行吗？',tag:'咨询'}],
     responses:{日常:['挺好的，就是闲得慌','你工作忙不忙？我看你天天早出晚归','年轻人拼是好事，但也得注意身体'],八卦:['小朱！出大事了！物业经理卷钱跑了','楼上那对小两口天天吵架','对面楼老刘被他老婆抓包了'],咨询:['这小区还行，就是物业差点意思','住久了就有感情了','你要是买，我帮你砍价']},
     followups:['听说卷了两百多万，好多业主气疯了','楼上那对昨晚又摔东西了','隔壁老王家儿子考上公务员了','你三姑问你啥时候带女朋友回来','你看对面楼老王，看着老实...']},
-  exColleague:{name:'前同事小周',avatar:'🧑‍💼',traits:['怀旧','感慨','信息量大','爱比较'],
+  exColleague:{name:'前同事小周',avatar:'img/avatars/exColleague.png',traits:['怀旧','感慨','信息量大','爱比较'],
     greetings:[{text:'小周，好久不见！',tag:'叙旧'},{text:'小周，以前公司咋样了？',tag:'打听'},{text:'小周，你现在在哪高就？',tag:'近况'}],
     responses:{叙旧:['老朱！好久不见！你怎么样','想死我了！最近在哪发财','哎呀，终于联系上了'],打听:['别提了，又裁员了','走了好几个人，现在人心惶惶','老板还是那个德行'],近况:['还行，在一家新公司','在创业呢，折腾折腾','刚跳槽，还在适应']},
     followups:['咱以前那公司，又裁员了！','你还记得咱以前那个总监吗？被猎头挖走了','最惨的是小李，刚买了房就被裁了','所以说打工没安全感，还是得有副业','我听说前公司上市了，可惜没拿到期权']},
-  mentor:{name:'导师李教授',avatar:'🧑‍🏫',traits:['睿智','温和','惜字如金','有深度'],
+  mentor:{name:'导师李教授',avatar:'img/avatars/mentor.png',traits:['睿智','温和','惜字如金','有深度'],
     greetings:[{text:'李老师，想请教您一个问题',tag:'请教'},{text:'李老师，最近在忙什么？',tag:'问候'},{text:'李老师，我遇到人生困惑了',tag:'迷茫'}],
     responses:{请教:['嗯，说来听听','你这个问题问得好','这个嘛...要看你怎么想'],问候:['还行，在做研究','你呢？最近怎么样','有空来坐坐'],迷茫:['人生困惑是正常的','你先想想，你真正想要什么','35岁之前拼能力，35岁之后拼选择']},
     followups:['记住，不要为了短期利益放弃长期价值','你现在做的每件事，都在为10年后的自己铺路','我最近在研究一个新课题，你有兴趣参与吗？','每个人答案不同，但核心是不后悔','你现在最大的困惑是什么？']},
-  gymCoach:{name:'健身教练',avatar:'💪',traits:['热情','直率','爱劝人健身','八卦体质'],
+  gymCoach:{name:'健身教练',avatar:'img/avatars/gymCoach.png',traits:['热情','直率','爱劝人健身','八卦体质'],
     greetings:[{text:'教练，最近有啥训练计划？',tag:'训练'},{text:'教练，健身房有啥八卦？',tag:'八卦'},{text:'教练，我最近状态不好',tag:'吐槽'}],
     responses:{训练:['兄弟来了！最近体脂有点高啊','得加点有氧了，不然白练','今天练哪个部位？'],八卦:['来来来，坐好听我说','这个你可得做好心理准备','嘿嘿，健身房的瓜可多了'],吐槽:['咋了兄弟？说出来','别憋着，练一场就好了','谁惹你了？']},
     followups:['隔壁健身房那个教练，带学员跑了','那个富婆每月花2万请私教，结果...','那个天天来练的大哥，据说欠了一屁股债','选教练得选靠谱的，像我这种不多了','你上次说要减脂，进展咋样了？']},
@@ -5152,7 +5153,7 @@ const NPC_PERSONALITIES={
     greetings:[{text:'你好？谁啊？',tag:'接电话'}],
     responses:{接电话:['您好，这里是XX银行，您的账户存在异常','恭喜您中奖100万！请先缴纳手续费','您的快递丢失了，需要理赔']},
     followups:['请按1转接人工客服...','请把资金转入安全账户...','需先缴纳手续费5000元...']},
-  spouse:{name:'小徐',avatar:'💑',traits:['亲密','唠叨','需要陪伴','偶尔吵架'],
+  spouse:{name:'小徐',avatar:'img/avatars/spouse.png',traits:['亲密','唠叨','需要陪伴','偶尔吵架'],
     greetings:[{text:'亲爱的，今天辛苦了',tag:'温情'},{text:'我们聊聊吧',tag:'谈心'},{text:'今晚吃什么？',tag:'日常'},{text:'最近压力好大',tag:'倾诉'}],
     responses:{温情:['你回来啦！','你也是，别太累了','有你在真好'],谈心:['怎么了？','你说，我听着','我们确实该好好聊聊'],日常:['你想吃什么？我做','出去吃吧，我请客','冰箱里有菜，随便做点'],倾诉:['怎么了？跟我说说','不管怎样我都在','别太累了，身体要紧']},
     followups:['你最近回来就玩手机，也不陪我说话','我们能不能换个大点的房子？','你记不记得今天是什么日子？','我妈说让我们周末回去吃饭','有你在真好，不管怎样']},
@@ -6453,7 +6454,7 @@ async function _generateNPCAIReply(npcId, playerMsg, chatHist){
   try{
     const resp=await fetch('https://token-plan-cn.xiaomimimo.com/v1/chat/completions',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer YOUR_TOKEN_HERE'},
       body:JSON.stringify({model:'xiaomi/mimo-v2.5',messages:[{role:'user',content:prompt}],temperature:0.92,max_tokens:500})
     });
     if(resp.ok){
@@ -6693,7 +6694,7 @@ function triggerGathering(){
 }
 
 // ===== 新增NPC：健身房教练/邻居/前同事/导师 =====
-const EXTRA_NPCS={gymCoach:{name:'健身教练',avatar:'💪'},neighbor:{name:'邻居老赵',avatar:'👴'},exColleague:{name:'前同事小周',avatar:'🧑‍💼'},mentor:{name:'导师李教授',avatar:'🧑‍🏫'},scammer:{name:'神秘号码',avatar:'🎭'},delivery:{name:'快递小哥',avatar:'🛵'}};
+const EXTRA_NPCS={gymCoach:{name:'健身教练',avatar:'img/avatars/gymCoach.png'},neighbor:{name:'邻居老赵',avatar:'img/avatars/neighbor.png'},exColleague:{name:'前同事小周',avatar:'img/avatars/exColleague.png'},mentor:{name:'导师李教授',avatar:'img/avatars/mentor.png'},scammer:{name:'神秘号码',avatar:'🎭'},delivery:{name:'快递小哥',avatar:'🛵'}};
 
 // ===== 扩展通讯录聊天话题 =====
 const EXTRA_CHAT_TOPICS=[
@@ -7048,7 +7049,7 @@ async function _aiFillThread(thread){
     try{
       const resp=await fetch('https://token-plan-cn.xiaomimimo.com/v1/chat/completions',{
         method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')},
+        headers:{'Content-Type':'application/json','Authorization':'Bearer YOUR_TOKEN_HERE'},
         body:JSON.stringify({model:'xiaomi/mimo-v2.5',messages:[{role:'user',content:prompt}],temperature:0.92,max_tokens:500})
       });
       if(resp.ok){
@@ -7180,7 +7181,7 @@ async function selectPhoneOption(optIdx){
         if(aiReply){nextRound.npcMsgs=[aiReply];}
       }catch(e){
         removeTypingIndicator();
-        if(p&&p.followups&&p.followups[0]){body.insertAdjacentHTML('beforeend','<div class="chat-bub npc">'+p.followups[0]+'</div>');body.scrollTop=body.scrollHeight;}
+        
       }
     }
     showToast('💬 还有后续消息需要回复');
@@ -7536,7 +7537,7 @@ ${p.name}的家人/朋友是${relation}。玩家${gameState.age}岁，${gameStat
       const resp=await fetch(AI_CHAT_CONFIG.apiUrl,{
         method:'POST',
         headers:{
-          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||''),
+          'Authorization':'Bearer YOUR_TOKEN_HERE',
           'Content-Type':'application/json'
         },
         body:JSON.stringify({
@@ -8937,14 +8938,13 @@ function buildNewsPrompt(ctx){
 
 async function callAI(promptBuilder,eventType){
   if(!AI_ENGINE.enabled||AI_ENGINE._fallbackCount>=AI_ENGINE.maxFallback)return Promise.resolve(null);
-  if(!window._aiQueue)window._aiQueue=Promise.resolve();
   // 入队：等待前一个调用完成后，间隔1秒再执行
-  const task=window._aiQueue.then(async()=>{
+  const task=_aiQueue.then(async()=>{
     await new Promise(r=>setTimeout(r,1000));
     return _doCallAI(promptBuilder,eventType);
   });
   // 更新队列（不让失败阻塞后续）
-  window._aiQueue=task.catch(()=>{});
+  _aiQueue=task.catch(()=>{});
   return task;
 }
 
@@ -10666,7 +10666,7 @@ async function generateEncounterAIResponse(sceneKey, npcName, choiceText, choice
       var resp = await fetch(AI_CHAT_CONFIG.endpoint, {
         method:'POST',
         headers:{
-          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||''),'Content-Type':'application/json'},
+          'Authorization':'Bearer YOUR_TOKEN_HERE','Content-Type':'application/json'},
         body:JSON.stringify({
           model: AI_CHAT_CONFIG.model,
           messages:[
@@ -11758,7 +11758,7 @@ async function sendAIChat(){
     const resp=await fetch(AI_CHAT_CONFIG.apiUrl,{
       method:'POST',
       headers:{
-          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||''),
+          'Authorization':'Bearer YOUR_TOKEN_HERE',
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
@@ -11955,7 +11955,7 @@ ${threadContext}${historyText?'\n历史消息：\n'+historyText:''}
       const resp=await fetch(AI_CHAT_CONFIG.apiUrl,{
         method:'POST',
         headers:{
-          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||''),'Content-Type':'application/json'},
+          'Authorization':'Bearer YOUR_TOKEN_HERE','Content-Type':'application/json'},
         body:JSON.stringify({
           model:AI_CHAT_CONFIG.model,
           messages:[{role:'system',content:systemPrompt},{role:'user',content:'## 玩家选择\n'+playerChoice+'\n\n（请根据上面的历史消息记忆，给出像真人一样的自然回复。）'}],
@@ -12444,7 +12444,7 @@ async function generateScheduleSceneAI(event,npcId,npcName,npcTraits,relType,act
     const resp=await fetch(AI_ENGINE.useProxy?AI_ENGINE.proxyUrl:AI_ENGINE.directUrl,{
       method:'POST',
       headers:{
-          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||''),'Content-Type':'application/json'},
+          'Authorization':'Bearer YOUR_TOKEN_HERE','Content-Type':'application/json'},
       body:JSON.stringify({model:AI_ENGINE.model,messages:[{role:'user',content:prompt}],temperature:0.92,max_tokens:500}),
       signal:_scAbort.signal
     });
