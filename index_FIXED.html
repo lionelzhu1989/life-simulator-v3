@@ -8938,6 +8938,7 @@ function buildNewsPrompt(ctx){
 
 async function callAI(promptBuilder,eventType){
   if(!window._aiQueue)window._aiQueue=Promise.resolve();
+promptBuilder,eventType){
   if(!AI_ENGINE.enabled||AI_ENGINE._fallbackCount>=AI_ENGINE.maxFallback)return Promise.resolve(null);
   // 入队：等待前一个调用完成后，间隔1秒再执行
   const task=window._aiQueue.then(async()=>{
