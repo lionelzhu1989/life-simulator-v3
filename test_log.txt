@@ -1,0 +1,142 @@
+[INFO] Step 0: Loading localhost:8099
+[INFO] Step 1: Starting new game
+[INFO]   Found start button: button:has-text('开始挑战')
+[INFO]   Clicked start
+[INFO] Step 2: Advancing 120 months via UI clicks...
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]   Advanced 20/20 months
+[INFO]   Advanced 40/40 months
+[INFO]   Advanced 60/60 months
+[INFO]   Advanced 80/80 months
+[INFO]   Advanced 100/100 months
+[INFO]   Advanced 120/120 months
+[INFO] Advanced total: 120 months
+[INFO] 
+Step 3: Testing all tabs and buttons
+[INFO] Navigation elements found:
+[INFO]   [SPAN] # .tab-icon '🏠' VISIBLE
+[INFO]   [SPAN] # . '首页' VISIBLE
+[INFO]   [SPAN] # .tab-icon '💼' VISIBLE
+[INFO]   [SPAN] # . '工作' VISIBLE
+[INFO]   [SPAN] # .tab-icon '📈' VISIBLE
+[INFO]   [SPAN] # . '投资' VISIBLE
+[INFO]   [SPAN] # .tab-icon '🐾' VISIBLE
+[INFO]   [SPAN] # . '宠物' VISIBLE
+[INFO]   [SPAN] #petBadge .phone-badge '0' hidden
+[INFO]   [SPAN] # .tab-icon '📚' VISIBLE
+[INFO]   [SPAN] # . '成长' VISIBLE
+[INFO]   [SPAN] # .tab-icon '🎯' VISIBLE
+[INFO]   [SPAN] # . '成就' VISIBLE
+[INFO]   [SPAN] # .tab-icon '📱' VISIBLE
+[INFO]   [SPAN] # . '手机' VISIBLE
+[INFO]   [SPAN] #phoneBadge .phone-badge '1' VISIBLE
+[INFO] 
+--- Tab: 首页 ---
+[INFO]   Found & clicked: {'found': True, 'text': '🏠首页', 'tag': 'DIV', 'cls': 'tab-item active tab-bar'}
+[INFO]   4 visible buttons: ['🚀 度过一月', '⏩ 快进5年', '⏩ 快进10年', '🤝 社交']
+[INFO]     Clicked: 🚀 度过一月
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 404 (File not found) 
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 404 (File not found) 
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 404 (File not found) 
+[INFO]     Clicked: ⏩ 快进5年
+[INFO]     Skipped (not visible): ⏩ 快进10年
+[INFO]     Skipped (not visible): 🤝 社交
+[INFO] 
+--- Tab: 工作 ---
+[INFO]   Found & clicked: {'found': True, 'text': '💼工作', 'tag': 'DIV', 'cls': 'tab-item tab-bar'}
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]   0 visible buttons: []
+[INFO] 
+--- Tab: 投资 ---
+[INFO]   Found & clicked: {'found': True, 'text': '📈投资', 'tag': 'DIV', 'cls': 'tab-item tab-bar'}
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]   0 visible buttons: []
+[INFO] 
+--- Tab: 宠物 ---
+[INFO]   Found & clicked: {'found': True, 'text': '🐾宠物0', 'tag': 'DIV', 'cls': 'tab-item tab-bar'}
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]   0 visible buttons: []
+[INFO] 
+--- Tab: 成长 ---
+[INFO]   Found & clicked: {'found': True, 'text': '📚成长', 'tag': 'DIV', 'cls': 'tab-item tab-bar'}
+[INFO]   0 visible buttons: []
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO] 
+--- Tab: 成就 ---
+[INFO]   Found & clicked: {'found': True, 'text': '🎯成就', 'tag': 'DIV', 'cls': 'tab-item tab-bar'}
+[INFO]   0 visible buttons: []
+[INFO] 
+--- Tab: 手机 ---
+[INFO]   Found & clicked: {'found': True, 'text': '📱手机6', 'tag': 'DIV', 'cls': 'tab-item tab-bar'}
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 404 (File not found) 
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]   0 visible buttons: []
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]     Sub-tab 消息 click failed: Locator.click: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator("button:not([hidden]):has-text('消息'), a:has-text('消息')").first
+    - locator resolved to <button id="faHandleBtn">📱 去处理消息</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    4 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
+
+[INFO]     Sub-tab '通讯录' not found
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]     Sub-tab 朋友圈 click failed: Locator.click: Timeout 2000ms exceeded.
+Call log:
+  - waiting for locator("button:not([hidden]):has-text('朋友圈'), a:has-text('朋友圈')").first
+    - locator resolved to <button class="moments-post-btn" onclick="showPostPanel()">✏️ 发朋友圈</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    4 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 500ms
+
+[INFO]     Sub-tab '通知' not found
+[INFO] 
+Step 4: Testing advance buttons
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]   clicked 快进5年
+[ISSUE] ISSUE: console → msg: Failed to load resource: the server responded with a status of 401 () 
+[INFO]   clicked 快进10年
+[INFO]   clicked 度过一月
+[INFO]   clicked 社交
+[INFO] 
+============================================================
+[INFO] TEST RESULTS SUMMARY
+[INFO] ============================================================
+[INFO]   首页: 4 buttons tested, 0 failed (100% success)
+[INFO]   工作: 0 buttons tested, 0 failed (0% success)
+[INFO]   投资: 0 buttons tested, 0 failed (0% success)
+[INFO]   宠物: 0 buttons tested, 0 failed (0% success)
+[INFO]   成长: 0 buttons tested, 0 failed (0% success)
+[INFO]   成就: 0 buttons tested, 0 failed (0% success)
+[INFO]   手机: 0 buttons tested, 0 failed (0% success)
+[INFO]     Sub: 消息 = failed
+[INFO]     Sub: 通讯录 = not_found
+[INFO]     Sub: 朋友圈 = failed
+[INFO]     Sub: 通知 = not_found
+[INFO] 
+Total issues: 17
+[INFO]   console: 17

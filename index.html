@@ -2,19 +2,16 @@
 <html lang="zh-CN">
 <head>
 <script>
-// URL参数传key系统 - 不修改任何原有逻辑
 (function(){
-  var hash = window.location.hash.substring(1);
-  var match = hash.match(/key=([^&]+)/);
-  if(match){
-    localStorage.setItem('mimo_api_key', decodeURIComponent(match[1]));
-    // 清理URL中的key参数
-    var clean = hash.replace(/key=[^&]+/, '').replace(/^&|&$/g, '');
-    history.replaceState(null, '', window.location.pathname + (clean ? '#' + clean : ''));
+  var h=location.hash.substring(1);
+  var m=h.match(/key=([^&]+)/);
+  if(m){
+    localStorage.setItem('mimo_api_key',decodeURIComponent(m[1]));
+    var c=h.replace(/key=[^&]+/,'').replace(/^&|&$/,'');
+    history.replaceState(null,'',location.pathname+(c?'#'+c:''));
   }
 })();
 </script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>offer含金量 v3.3</title>
@@ -25,7 +22,7 @@
 html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Hiragino Sans GB',sans-serif;background:var(--bg);color:var(--text);overflow:hidden;}
 .app{height:100%;display:flex;flex-direction:column;max-width:480px;margin:0 auto;position:relative;background:var(--bg);}
 .page{flex:1;overflow-y:auto;padding:16px;padding-bottom:80px;-webkit-overflow-scrolling:touch;display:none;}
-.page.active{display:block;}
+.page.active{display:block;min-height:400px;height:auto;overflow:visible;}
 .header{background:var(--header-bg);color:#fff;padding:16px 20px 14px;text-align:center;position:relative;flex-shrink:0;}
 .header h1{font-size:18px;font-weight:600;letter-spacing:1px;}
 .header-sub{font-size:12px;color:rgba(255,255,255,0.6);margin-top:4px;}
@@ -278,8 +275,8 @@ html,body{height:100%;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','P
 /* Trade input number spinner hide */
 #tradeInput::-webkit-inner-spin-button,#tradeInput::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 #tradeInput[type=number]{-moz-appearance:textfield;}
-.chat-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#ededed;z-index:99999;display:none;flex-direction:column;max-width:480px;margin:0 auto;}
-.chat-overlay.show{display:flex;}
+.chat-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:#ededed;z-index:1000;display:none;flex-direction:column;max-width:480px;margin:0 auto;}
+.chat-overlay.show{display:flex;z-index:1000;}
 .chat-hd{background:var(--header-bg);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0;}
 .chat-back{font-size:24px;cursor:pointer;padding:4px;line-height:1;}
 .chat-nm{font-size:17px;font-weight:600;}
@@ -3454,7 +3451,7 @@ async function generateWorkScenario(){
   try{
     const resp=await fetch('https://token-plan-cn.xiaomimimo.com/v1/chat/completions',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + ''},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+''},
       body:JSON.stringify({model:'xiaomi/mimo-v2.5',messages:[{role:'user',content:prompt}],temperature:0.9,max_tokens:500})
     });
     if(resp.ok){
@@ -6468,7 +6465,7 @@ async function _generateNPCAIReply(npcId, playerMsg, chatHist){
   try{
     const resp=await fetch('https://token-plan-cn.xiaomimimo.com/v1/chat/completions',{
       method:'POST',
-      headers:{'Content-Type':'application/json','Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + ''},
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+''},
       body:JSON.stringify({model:'xiaomi/mimo-v2.5',messages:[{role:'user',content:prompt}],temperature:0.92,max_tokens:500})
     });
     if(resp.ok){
@@ -7063,7 +7060,7 @@ async function _aiFillThread(thread){
     try{
       const resp=await fetch('https://token-plan-cn.xiaomimimo.com/v1/chat/completions',{
         method:'POST',
-        headers:{'Content-Type':'application/json','Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + ''},
+        headers:{'Content-Type':'application/json','Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+''},
         body:JSON.stringify({model:'xiaomi/mimo-v2.5',messages:[{role:'user',content:prompt}],temperature:0.92,max_tokens:500})
       });
       if(resp.ok){
@@ -7195,7 +7192,10 @@ async function selectPhoneOption(optIdx){
         if(aiReply){nextRound.npcMsgs=[aiReply];}
       }catch(e){
         removeTypingIndicator();
-        
+        if(p&&p.followups&&p.followups[0]){
+          body.insertAdjacentHTML('beforeend','<div class="chat-bub npc">'+p.followups[0]+'</div>');
+          body.scrollTop=body.scrollHeight;
+        }
       }
     }
     showToast('💬 还有后续消息需要回复');
@@ -7301,7 +7301,7 @@ function closeChatProfile(){
 // ===== AI Chat System (via CORS Proxy) =====
 const AI_CHAT_CONFIG={
   apiUrl:'https://token-plan-cn.xiaomimimo.com/v1/chat/completions',
-  apiKey: (localStorage.getItem('mimo_api_key') || ''), // proxy adds api-key header
+  apiKey:'YOUR_TOKEN_HERE', // proxy adds api-key header
   model:'xiaomi/mimo-v2.5',
   enabled:true,
   _fallbackCount:0,
@@ -7551,7 +7551,7 @@ ${p.name}的家人/朋友是${relation}。玩家${gameState.age}岁，${gameStat
       const resp=await fetch(AI_CHAT_CONFIG.apiUrl,{
         method:'POST',
         headers:{
-          'Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + '',
+          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+'',
           'Content-Type':'application/json'
         },
         body:JSON.stringify({
@@ -8664,7 +8664,7 @@ const AI_ENGINE={
   enabled:true,
   proxyUrl:'https://token-plan-cn.xiaomimimo.com/v1/chat/completions',
   directUrl:'https://token-plan-cn.xiaomimimo.com/v1/chat/completions',
-  apiKey: (localStorage.getItem('mimo_api_key') || ''),
+  apiKey:'YOUR_TOKEN_HERE',
   model:'xiaomi/mimo-v2.5',
   useProxy:false,
   cache:{},// prompt hash → response
@@ -8952,8 +8952,7 @@ function buildNewsPrompt(ctx){
 
 async function callAI(promptBuilder,eventType){
   if(!AI_ENGINE.enabled||AI_ENGINE._fallbackCount>=AI_ENGINE.maxFallback)return Promise.resolve(null);
-  // 初始化AI队列（防止首次调用时 undefined）
-  if(!window._aiQueue) window._aiQueue = Promise.resolve();
+  if(!window._aiQueue)window._aiQueue=Promise.resolve();
   // 入队：等待前一个调用完成后，间隔1秒再执行
   const task=window._aiQueue.then(async()=>{
     await new Promise(r=>setTimeout(r,1000));
@@ -10682,7 +10681,7 @@ async function generateEncounterAIResponse(sceneKey, npcName, choiceText, choice
       var resp = await fetch(AI_CHAT_CONFIG.endpoint, {
         method:'POST',
         headers:{
-          'Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + '','Content-Type':'application/json'},
+          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+'','Content-Type':'application/json'},
         body:JSON.stringify({
           model: AI_CHAT_CONFIG.model,
           messages:[
@@ -10871,7 +10870,7 @@ async function generateFriendInteraction(friend){
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + ''
+        'Authorization': 'Bearer '+(localStorage.getItem('mimo_api_key')||'')+''
       },
       body: JSON.stringify({
         model: 'xiaomi/mimo-v2.5',
@@ -11774,7 +11773,7 @@ async function sendAIChat(){
     const resp=await fetch(AI_CHAT_CONFIG.apiUrl,{
       method:'POST',
       headers:{
-          'Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + '',
+          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+'',
         'Content-Type':'application/json'
       },
       body:JSON.stringify({
@@ -11971,7 +11970,7 @@ ${threadContext}${historyText?'\n历史消息：\n'+historyText:''}
       const resp=await fetch(AI_CHAT_CONFIG.apiUrl,{
         method:'POST',
         headers:{
-          'Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + '','Content-Type':'application/json'},
+          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+'','Content-Type':'application/json'},
         body:JSON.stringify({
           model:AI_CHAT_CONFIG.model,
           messages:[{role:'system',content:systemPrompt},{role:'user',content:'## 玩家选择\n'+playerChoice+'\n\n（请根据上面的历史消息记忆，给出像真人一样的自然回复。）'}],
@@ -12460,7 +12459,7 @@ async function generateScheduleSceneAI(event,npcId,npcName,npcTraits,relType,act
     const resp=await fetch(AI_ENGINE.useProxy?AI_ENGINE.proxyUrl:AI_ENGINE.directUrl,{
       method:'POST',
       headers:{
-          'Authorization':'Bearer ' + (localStorage.getItem('mimo_api_key') || '') + '','Content-Type':'application/json'},
+          'Authorization':'Bearer '+(localStorage.getItem('mimo_api_key')||'')+'','Content-Type':'application/json'},
       body:JSON.stringify({model:AI_ENGINE.model,messages:[{role:'user',content:prompt}],temperature:0.92,max_tokens:500}),
       signal:_scAbort.signal
     });
